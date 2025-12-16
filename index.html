@@ -136,6 +136,33 @@ header p{
 .bld2{left:45%;animation-delay:.2s}
 .bld3{left:60%;animation-delay:.4s}
 
+/* ===== ENHANCED PICTOGRAPH STYLES ===== */
+.fault{
+  position:absolute;
+  bottom:90px;
+  left:50%;
+  width:4px;
+  height:70px;
+  background:#00ffff;
+  box-shadow:0 0 20px #00ffff;
+  animation:faultPulse 1.5s infinite;
+}
+@keyframes faultPulse{0%,100%{opacity:.4}50%{opacity:1}}
+
+.mountain{
+  position:absolute;
+  bottom:90px;
+  width:0;height:0;
+  border-left:60px solid transparent;
+  border-right:60px solid transparent;
+  border-bottom:100px solid #2e3b3b;
+}
+.m1{left:10%}
+.m2{right:12%}
+
+.bld4{left:20%;height:110px;animation-delay:.6s}
+.bld5{left:70%;height:160px;animation-delay:.8s}
+
 /* ===== QUIZ ===== */
 .quiz{
   max-width:600px;
@@ -182,11 +209,25 @@ footer{text-align:center;padding:40px;opacity:.7}
 </div>
 
 <section class="scene">
+  <!-- Tectonic plates -->
   <div class="plate left"></div>
   <div class="plate right"></div>
+
+  <!-- Fault crack -->
+  <div class="fault"></div>
+
+  <!-- Buildings -->
   <div class="building bld1"></div>
   <div class="building bld2"></div>
   <div class="building bld3"></div>
+  <div class="building bld4"></div>
+  <div class="building bld5"></div>
+
+  <!-- Mountains / landforms -->
+  <div class="mountain m1"></div>
+  <div class="mountain m2"></div>
+
+  <!-- Ground -->
   <div class="ground"></div>
 </section>
 
