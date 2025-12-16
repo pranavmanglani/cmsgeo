@@ -5,243 +5,40 @@
 <title>Geography | Earthquake</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-body{
-  background:#05080d;
-  color:#e9ffff;
-  overflow-x:hidden;
-}
-
-/* ===== BACKGROUND GRID ===== */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:
-    linear-gradient(rgba(0,255,255,.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0,255,255,.06) 1px, transparent 1px);
-  background-size:60px 60px;
-  z-index:-1;
-}
-
-header{
-  padding:60px 20px;
-  text-align:center;
-}
-header h1{
-  font-size:3.2rem;
-  color:#00ffff;
-  text-shadow:0 0 20px #00ffff;
-}
-header p{
-  margin-top:10px;
-  font-size:1.2rem;
-  opacity:.85;
-}
-
-/* ===== CORE DIAGRAM ===== */
-.diagram{
-  position:relative;
-  width:900px;
-  max-width:95%;
-  height:520px;
-  margin:60px auto;
-}
-
-.center{
-  position:absolute;
-  top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:240px;height:240px;
-  border-radius:50%;
-  border:3px solid #00ffff;
-  box-shadow:0 0 35px #00ffff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
-.center strong{font-size:1.3rem;letter-spacing:2px}
-
-.box{
-  position:absolute;
-  width:260px;
-  padding:18px;
-  background:rgba(0,20,40,.9);
-  border:2px solid #00ffff;
-  box-shadow:0 0 25px #00ffff;
-  animation:float 4s ease-in-out infinite alternate;
-}
-@keyframes float{to{transform:translateY(-18px)}}
-
-.b1{top:0;left:0}
-.b2{top:0;right:0}
-.b3{bottom:0;left:0}
-.b4{bottom:0;right:0}
-.b5{bottom:-40px;left:50%;transform:translateX(-50%)}
-
-.line{
-  position:absolute;
-  background:#00ffff;
-  box-shadow:0 0 15px #00ffff;
-}
+body{background:#05080d;color:#e9ffff;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(0,255,255,.06) 1px, transparent 1px),linear-gradient(90deg, rgba(0,255,255,.06) 1px, transparent 1px);background-size:60px 60px;z-index:-1}
+header{text-align:center;padding:60px 20px}
+header h1{font-size:3.2rem;color:#00ffff;text-shadow:0 0 20px #00ffff}
+header p{margin-top:10px;font-size:1.2rem;opacity:.85}
+.diagram{position:relative;width:900px;max-width:95%;height:520px;margin:60px auto}
+.center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:240px;height:240px;border-radius:50%;border:3px solid #00ffff;box-shadow:0 0 35px #00ffff;display:flex;align-items:center;justify-content:center;text-align:center}
+.box{position:absolute;width:260px;padding:18px;background:rgba(0,20,40,.9);border:2px solid #00ffff;box-shadow:0 0 25px #00ffff}
+.b1{top:0;left:0}.b2{top:0;right:0}.b3{bottom:0;left:0}.b4{bottom:0;right:0}.b5{bottom:-40px;left:50%;transform:translateX(-50%)}
+.line{position:absolute;background:#00ffff;box-shadow:0 0 15px #00ffff}
 .l1{top:120px;left:260px;width:170px;height:2px}
 .l2{top:120px;right:260px;width:170px;height:2px}
 .l3{bottom:120px;left:260px;width:170px;height:2px}
 .l4{bottom:120px;right:260px;width:170px;height:2px}
-.l5{bottom:0;left:50%;width:2px;height:120px}
-
-/* ===== TECTONIC ANIMATION ===== */
-.scene{
-  position:relative;
-  height:320px;
-  margin:120px auto;
-  max-width:1000px;
-}
-
-.ground{
-  position:absolute;
-  bottom:0;
-  width:100%;
-  height:90px;
-  background:#3a2a2a;
-}
-
-.plate{
-  position:absolute;
-  bottom:90px;
-  width:50%;
-  height:50px;
-  background:#666;
-}
-
-.plate.left{left:0;animation:plateL 4s infinite}
-.plate.right{right:0;animation:plateR 4s infinite}
-
-@keyframes plateL{0%,100%{transform:translateX(0)}50%{transform:translateX(45px)}}
-@keyframes plateR{0%,100%{transform:translateX(0)}50%{transform:translateX(-45px)}}
-
-.building{
-  position:absolute;
-  bottom:90px;
-  width:45px;
-  height:140px;
-  background:linear-gradient(#00ffff,#002);
-  animation:sway 1s infinite;
-  transform-origin:bottom;
-}
-
-@keyframes sway{0%{transform:rotate(0)}50%{transform:rotate(2deg)}100%{transform:rotate(-2deg)}}
-
-.bld1{left:30%}
-.bld2{left:45%;animation-delay:.2s}
-.bld3{left:60%;animation-delay:.4s}
-
-/* ===== ENHANCED PICTOGRAPH STYLES ===== */
-.fault{
-  position:absolute;
-  bottom:90px;
-  left:50%;
-  width:4px;
-  height:70px;
-  background:#00ffff;
-  box-shadow:0 0 20px #00ffff;
-  animation:faultPulse 1.5s infinite;
-}
-@keyframes faultPulse{0%,100%{opacity:.4}50%{opacity:1}}
-
-.mountain{
-  position:absolute;
-  bottom:90px;
-  width:0;height:0;
-  border-left:60px solid transparent;
-  border-right:60px solid transparent;
-  border-bottom:100px solid #2e3b3b;
-}
-.m1{left:10%}
-.m2{right:12%}
-
-.bld4{left:20%;height:110px;animation-delay:.6s}
-.bld5{left:70%;height:160px;animation-delay:.8s}
-
-/* ===== REALISTIC EARTHQUAKE PICTOGRAPH ===== */
 .scene{position:relative;height:360px;margin:120px auto;max-width:1100px}
-
 .city{position:absolute;bottom:160px;left:0;right:0;display:flex;justify-content:space-evenly;z-index:3}
-
-.building{
-  width:50px;
-  background:linear-gradient(#00ffff,#003);
-  transform-origin:bottom;
-  animation:quake 0.9s infinite;
-}
-.building.tall{height:160px}
-.building.mid{height:120px;animation-delay:.2s}
-.building.short{height:90px;animation-delay:.4s}
-
-@keyframes quake{
-  0%{transform:rotate(0deg)}
-  25%{transform:rotate(1.8deg)}
-  50%{transform:rotate(-1.8deg)}
-  75%{transform:rotate(1deg)}
-  100%{transform:rotate(0deg)}
-}
-
-.surface{
-  position:absolute;
-  bottom:130px;
-  width:100%;
-  height:30px;
-  background:#6b6b6b;
-  box-shadow:inset 0 -4px 8px rgba(0,0,0,.5);
-}
-
-.fault-zone{
-  position:absolute;
-  bottom:80px;
-  left:50%;
-  width:6px;
-  height:80px;
-  background:#00ffff;
-  box-shadow:0 0 25px #00ffff;
-  animation:faultSnap 1.2s infinite;
-  z-index:2;
-}
-@keyframes faultSnap{0%,100%{opacity:.4}50%{opacity:1}}
-
-.plate{
-  position:absolute;
-  bottom:0;
-  width:50%;
-  height:80px;
-  background:linear-gradient(#4a3a3a,#2b1f1f);
-}
-.plate.left{left:0;animation:platePushL 4s infinite}
-.plate.right{right:0;animation:platePushR 4s infinite}
-
-@keyframes platePushL{0%,100%{transform:translateX(0)}50%{transform:translateX(35px)}}
-@keyframes platePushR{0%,100%{transform:transl
-.quiz{
-  max-width:600px;
-  margin:80px auto;
-  padding:40px;
-  border:2px solid #00ffff;
-  box-shadow:0 0 40px #00ffff;
-  background:rgba(0,0,0,.7);
-}
-.quiz h2{text-align:center;margin-bottom:20px}
-.quiz button{
-  width:100%;
-  margin:10px 0;
-  padding:14px;
-  background:#001c2c;
-  border:1px solid #00ffff;
-  color:#e9ffff;
-  cursor:pointer;
-}
-.quiz button:hover{background:#00ffff;color:#000}
-
-footer{text-align:center;padding:40px;opacity:.7}
-</style>
+.building{position:relative;width:60px;background:linear-gradient(#00ffff,#003);transform-origin:bottom;border-radius:6px;}
+.building::after{content:"";position:absolute;inset:10px;display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:14px;gap:6px;background:repeating-linear-gradient(#000 0 14px, transparent 14px 20px)}
+.tall{height:170px}.mid{height:130px}.short{height:100px}
+.surface{position:absolute;bottom:130px;width:100%;height:30px;background:#6b6b6b}
+.fault-zone{position:absolute;bottom:80px;left:50%;width:6px;height:80px;background:#00ffff;box-shadow:0 0 25px #00ffff;opacity:0}
+.plate{position:absolute;bottom:0;width:50%;height:80px;background:linear-gradient(#4a3a3a,#2b1f1f)}
+.plate.left{left:0}.plate.right{right:0}
+/* earthquake active */
+.quake .building{animation:quake 0.9s infinite}
+.quake .fault-zone{opacity:1;animation:faultSnap 1.2s infinite}
+.quake .plate.left{animation:platePushL 4s infinite}
+.quake .plate.right{animation:platePushR 4s infinite}
+@keyframes quake{0%{transform:rotate(0)}25%{transform:rotate(2deg)}50%{transform:rotate(-2deg)}75%{transform:rotate(1deg)}100%{transform:rotate(0)}}
+@keyframes platePushL{50%{transform:translateX(35px)}}
+@keyframes platePushR{50%{transform:translateX(-35px)}}
+@keyframes faultSnap{50%{opacity:1}}
+.controls{text-align:center;margin-top:-60px}
+button{padding:14px 28px;background:#001c2c;border:2px solid #00fff
 </head>
 <body>
 
