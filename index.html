@@ -55,19 +55,9 @@ section{padding:100px 8%}
   height:300px;
   margin:0 auto 120px;
 }
-.core .center{
-  position:absolute;
-  inset:0;
-  border-radius:50%;
-  border:3px solid #00ffff;
-  box-shadow:0 0 40px #00ffff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  animation:spin 20s linear infinite;
+
 }
-@keyframes spin{to{transform:rotate(360deg)}}
+/* removed rotation animation for center circle */}
 
 .float-box{
   position:absolute;
@@ -80,12 +70,7 @@ section{padding:100px 8%}
 }
 @keyframes float{to{transform:translateY(-20px)}}
 
-.line{
-  position:absolute;
-  width:2px;
-  background:#00ffff;
-  box-shadow:0 0 15px #00ffff;
-}
+.line{position:absolute;width:2px;background:#00ffff;box-shadow:0 0 20px #00ffff;transform-origin:top;}
 
 /* positions */
 .b1{top:-60px;left:-320px}
@@ -152,7 +137,7 @@ footer{text-align:center;padding:30px;opacity:.6}
 
 <section>
   <div class="core">
-    <div class="center"><strong>EARTHQUAKE<br>THEORY</strong></div>
+    <div class="center"><div class="title">GEOGRAPHY<br><span>EARTHQUAKE</span></div></div>
     <div class="float-box b1">Earthquakes occur due to sudden energy release in the Earth's crust caused by tectonic stress.</div>
     <div class="float-box b2">The lithosphere is broken into tectonic plates that constantly move and interact.</div>
     <div class="float-box b3">Stress builds at plate boundaries until rocks fracture and seismic waves form.</div>
