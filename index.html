@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Earthquake | Neon Seismic Core</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif}
+body{
+  background:#05070c;
+  color:#e6f9ff;
+  overflow-x:hidden;
+}
+
+/* ====== BACKGROUND ANIMATION ====== */
+.bg-lines{
+  position:fixed;
+  inset:0;
+  background:
+    linear-gradient(90deg,rgba(0,255,255,.05) 1px,transparent 1px),
+    linear-gradient(rgba(0,255,255,.05) 1px,transparent 1px);
+  background-size:60px 60px;
+  animation:gridMove 10s linear infinite;
+  z-index:-1;
+}
+@keyframes gridMove{to{background-position:60px 60px}}
+
+header{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  text-align:center;
+}
+header h1{
+  font-size:4.5rem;
+  color:#00ffff;
+  text-shadow:0 0 20px #00ffff,0 0 60px #00aaff;
+  animation:pulse 2s infinite alternate;
+}
+@keyframes pulse{from{transform:scale(1)}to{transform:scale(1.05)}}
+
+header p{
+  margin-top:20px;
+  font-size:1.2rem;
+  opacity:.8;
+}
+
+section{padding:100px 8%}
+
+/* ====== FLOATING THEORY BOXES ====== */
+.core{
+  position:relative;
+  width:300px;
+  height:300px;
+  margin:0 auto 120px;
+}
+.core .center{
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:3px solid #00ffff;
+  box-shadow:0 0 40px #00ffff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  animation:spin 20s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.float-box{
+  position:absolute;
+  width:260px;
+  padding:20px;
+  background:rgba(0,20,40,.8);
+  border:2px solid #00ffff;
+  box-shadow:0 0 25px #00ffff;
+  animation:float 4s ease-in-out infinite alternate;
+}
+@keyframes float{to{transform:translateY(-20px)}}
+
+.line{
+  position:absolute;
+  width:2px;
+  background:#00ffff;
+  box-shadow:0 0 15px #00ffff;
+}
+
+/* positions */
+.b1{top:-60px;left:-320px}
+.b2{top:-60px;right:-320px}
+.b3{bottom:-60px;left:-320px}
+.b4{bottom:-60px;right:-320px}
+.b5{top:110%;left:20px}
+
+.l1{top:0;left:-60px;height:160px}
+.l2{top:0;right:-60px;height:160px}
+.l3{bottom:0;left:-60px;height:160px}
+.l4{bottom:0;right:-60px;height:160px}
+.l5{bottom:-100px;left:50%;height:100px}
+
+/* ====== EARTHQUAKE PICTOGRAM ====== */
+.scene{
+  position:relative;
+  height:280px;
+  margin-top:80px;
+}
+.ground{position:absolute;bottom:0;width:100%;height:70px;background:#3a2a2a;animation:shake .3s infinite}
+.plate{position:absolute;bottom:70px;width:50%;height:40px;background:#555}
+.plate.left{left:0;animation:plateL 3s infinite}
+.plate.right{right:0;animation:plateR 3s infinite}
+@keyframes plateL{50%{transform:translateX(25px)}}
+@keyframes plateR{50%{transform:translateX(-25px)}}
+.building{position:absolute;bottom:70px;width:45px;height:120px;background:linear-gradient(#00ffff,#002);animation:shake .2s infinite}
+.bld1{left:30%}.bld2{left:45%}.bld3{left:60%}
+@keyframes shake{25%{transform:translateX(-3px)}50%{transform:translateX(3px)}}
+
+/* ====== QUIZ ====== */
+.quiz{
+  max-width:600px;
+  margin:auto;
+  background:rgba(0,0,0,.7);
+  border:2px solid #00ffff;
+  box-shadow:0 0 40px #00ffff;
+  padding:40px;
+}
+.quiz h2{text-align:center;margin-bottom:20px}
+.quiz button{
+  width:100%;
+  margin:10px 0;
+  padding:14px;
+  background:#001a2a;
+  border:1px solid #00ffff;
+  color:#e6f9ff;
+  cursor:pointer;
+  transition:.3s;
+}
+.quiz button:hover{background:#00ffff;color:#000}
+#result{text-align:center;margin-top:20px;font-size:1.2rem}
+
+footer{text-align:center;padding:30px;opacity:.6}
+</style>
+</head>
+<body>
+<div class="bg-lines"></div>
+
+<header>
+  <h1>SEISMIC CORE</h1>
+  <p>Where tectonic forces meet neon animation</p>
+</header>
+
+<section>
+  <div class="core">
+    <div class="center"><strong>EARTHQUAKE<br>THEORY</strong></div>
+    <div class="float-box b1">Earthquakes occur due to sudden energy release in the Earth's crust caused by tectonic stress.</div>
+    <div class="float-box b2">The lithosphere is broken into tectonic plates that constantly move and interact.</div>
+    <div class="float-box b3">Stress builds at plate boundaries until rocks fracture and seismic waves form.</div>
+    <div class="float-box b4">The focus is the origin point underground, while the epicenter lies above it.</div>
+    <div class="float-box b5">Understanding earthquakes helps design structures that resist seismic damage.</div>
+
+    <div class="line l1"></div><div class="line l2"></div>
+    <div class="line l3"></div><div class="line l4"></div>
+    <div class="line l5"></div>
+  </div>
+</section>
+
+<section>
+  <h2>Animated Seismic Pictogram</h2>
+  <div class="scene">
+    <div class="plate left"></div>
+    <div class="plate right"></div>
+    <div class="building bld1"></div>
+    <div class="building bld2"></div>
+    <div class="building bld3"></div>
+    <div class="ground"></div>
+  </div>
+</section>
+
+<section>
+  <div class="quiz">
+    <h2>Earthquake Quiz</h2>
+    <p>What causes earthquakes?</p>
+    <button onclick="result.innerText='Correct!';">Sudden release of tectonic stress</button>
+    <button onclick="result.innerText='Try again';">Wind pressure</button>
+    <button onclick="result.innerText='Try again';">Ocean tides</button>
+    <div id="result"></div>
+  </div>
+</section>
+
+<footer>⚡ Futuristic Seismic Visualization ⚡</footer>
+</body>
+</html>
