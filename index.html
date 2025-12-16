@@ -163,7 +163,63 @@ header p{
 .bld4{left:20%;height:110px;animation-delay:.6s}
 .bld5{left:70%;height:160px;animation-delay:.8s}
 
-/* ===== QUIZ ===== */
+/* ===== REALISTIC EARTHQUAKE PICTOGRAPH ===== */
+.scene{position:relative;height:360px;margin:120px auto;max-width:1100px}
+
+.city{position:absolute;bottom:160px;left:0;right:0;display:flex;justify-content:space-evenly;z-index:3}
+
+.building{
+  width:50px;
+  background:linear-gradient(#00ffff,#003);
+  transform-origin:bottom;
+  animation:quake 0.9s infinite;
+}
+.building.tall{height:160px}
+.building.mid{height:120px;animation-delay:.2s}
+.building.short{height:90px;animation-delay:.4s}
+
+@keyframes quake{
+  0%{transform:rotate(0deg)}
+  25%{transform:rotate(1.8deg)}
+  50%{transform:rotate(-1.8deg)}
+  75%{transform:rotate(1deg)}
+  100%{transform:rotate(0deg)}
+}
+
+.surface{
+  position:absolute;
+  bottom:130px;
+  width:100%;
+  height:30px;
+  background:#6b6b6b;
+  box-shadow:inset 0 -4px 8px rgba(0,0,0,.5);
+}
+
+.fault-zone{
+  position:absolute;
+  bottom:80px;
+  left:50%;
+  width:6px;
+  height:80px;
+  background:#00ffff;
+  box-shadow:0 0 25px #00ffff;
+  animation:faultSnap 1.2s infinite;
+  z-index:2;
+}
+@keyframes faultSnap{0%,100%{opacity:.4}50%{opacity:1}}
+
+.plate{
+  position:absolute;
+  bottom:0;
+  width:50%;
+  height:80px;
+  background:linear-gradient(#4a3a3a,#2b1f1f);
+}
+.plate.left{left:0;animation:platePushL 4s infinite}
+.plate.right{right:0;animation:platePushR 4s infinite}
+
+@keyframes platePushL{0%,100%{transform:translateX(0)}50%{transform:translateX(35px)}}
+@keyframes platePushR{0%,100%{transform:transl
 .quiz{
   max-width:600px;
   margin:80px auto;
@@ -209,26 +265,24 @@ footer{text-align:center;padding:40px;opacity:.7}
 </div>
 
 <section class="scene">
-  <!-- Tectonic plates -->
+  <!-- SKYLINE / CITY -->
+  <div class="city">
+    <div class="building tall"></div>
+    <div class="building mid"></div>
+    <div class="building short"></div>
+    <div class="building mid"></div>
+    <div class="building tall"></div>
+  </div>
+
+  <!-- GROUND SURFACE -->
+  <div class="surface"></div>
+
+  <!-- FAULT ZONE -->
+  <div class="fault-zone"></div>
+
+  <!-- TECTONIC PLATES -->
   <div class="plate left"></div>
   <div class="plate right"></div>
-
-  <!-- Fault crack -->
-  <div class="fault"></div>
-
-  <!-- Buildings -->
-  <div class="building bld1"></div>
-  <div class="building bld2"></div>
-  <div class="building bld3"></div>
-  <div class="building bld4"></div>
-  <div class="building bld5"></div>
-
-  <!-- Mountains / landforms -->
-  <div class="mountain m1"></div>
-  <div class="mountain m2"></div>
-
-  <!-- Ground -->
-  <div class="ground"></div>
 </section>
 
 <section class="quiz">
