@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Global Seismic Venture</title>
+    <title>The Global Seismic Venture - 2025 Edition</title>
     <style>
         :root {
             --primary: #0f172a;
@@ -36,7 +36,6 @@
             transform: translateY(0);
         }
 
-        /* --- Layout --- */
         header {
             height: 100vh;
             display: flex;
@@ -107,9 +106,8 @@
             font-style: italic;
         }
 
-        /* --- Interactive Earthquake Model --- */
         .quake-stage {
-            height: 300px;
+            height: 250px;
             background: #020617;
             border-radius: 20px;
             position: relative;
@@ -120,19 +118,19 @@
             display: flex;
             justify-content: space-around;
             align-items: flex-end;
-            height: 150px;
+            height: 120px;
             padding: 0 20px;
             position: relative;
             z-index: 2;
         }
 
-        .b { width: 40px; background: linear-gradient(#334155, #1e293b); border-radius: 4px 4px 0 0; }
-        .b.tall { height: 120px; }
-        .b.mid { height: 80px; }
-        .b.short { height: 50px; }
+        .b { width: 35px; background: linear-gradient(#334155, #1e293b); border-radius: 4px 4px 0 0; }
+        .b.tall { height: 100px; }
+        .b.mid { height: 60px; }
+        .b.short { height: 35px; }
 
         .ground-layer {
-            height: 150px;
+            height: 130px;
             background: linear-gradient(#422006, #1a0a02);
             position: relative;
         }
@@ -174,55 +172,65 @@
         A multi-disciplinary exploration into the geographic, scientific, and human consequences of tectonic activity.
     </p>
     <div class="team-box" data-reveal>
-        Shrijal • Ajitendra • Vaidik • Inisha [cite: 3]
+        Shrijal • Ajitendra • Vaidik • Inisha
     </div>
 </header>
 
 <section data-reveal>
     <div class="content-text">
-        <h2>Week 1: The Human Geography of Risk</h2>
-        <p>Our journey began by comparing major earthquakes in <b>Italy, Nepal, Gujarat, and Turkey</b>. We learned that the "Why" of a disaster is often linked to human factors rather than just the magnitude of the tremor[cite: 7].</p>
-        <ul>
-            <li><b>Vulnerability:</b> Socio-economic status determines survival[cite: 7].</li>
-            <li><b>Preparedness:</b> Strict building codes are the primary defense against ground displacement[cite: 7].</li>
-        </ul>
-    </div>
+        <h2>Week 1: Socio-Economic Vulnerability</h2>
+        <p>We studied <b>Italy, Nepal, Gujarat, and Turkey</b> to understand that disaster impact is not just about magnitude. Vulnerability is tied to building codes and economic resources.</p>
+            </div>
     <div class="visual-container">
-        
-        <div class="caption">Figure 1: Building code effectiveness in earthquake zones [cite: 7]</div>
+        <div class="content-text">
+            <p><b>Key Findings:</b></p>
+            <ul>
+                <li>Building codes are the primary defense against collapse.</li>
+                <li>Symmetrical plans and low height-to-base ratios improve safety.</li>
+            </ul>
+        </div>
     </div>
 </section>
 
 <section data-reveal>
     <div class="content-text">
         <h2>Week 2: Tectonic Mechanics</h2>
-        <p>We tracked real-time tremors to understand that seismic activity is a predictable consequence of the movement of the Earth’s lithosphere[cite: 11]. Plates are in constant, slow motion over the asthenosphere, creating immense stress at their boundaries[cite: 11].</p>
+        <p>Seismic activity is a predictable consequence of plate movements. We explored how plates interact at their boundaries to release massive energy.</p>
     </div>
     <div class="visual-container">
-        
-
-[Image of the three types of plate boundaries: Convergent, Divergent, and Transform]
-
-        <div class="caption">Figure 2: The mechanics of tectonic interaction [cite: 9]</div>
+                <div class="caption">Figure 1: Convergent (colliding), Divergent (spreading), and Transform (sliding) boundaries.</div>
     </div>
 </section>
 
 <section data-reveal>
     <div class="content-text">
-        <h2>Week 3: The Science of Seismology</h2>
-        <p>This phase focused on interpreting the data. We studied how <b>P-waves</b> (Primary) and <b>S-waves</b> (Secondary) travel through the Earth. Locating the <b>epicenter</b> and <b>hypocenter</b> allows scientists to calculate the exact energy release[cite: 15].</p>
+        <h2>Week 3: Seismic Waves</h2>
+        <p>Seismology relies on tracking <b>P-waves</b> and <b>S-waves</b>. P-waves are faster and travel through liquids, while S-waves are slower and only travel through solids.</p>
     </div>
     <div class="visual-container">
-        
-        <div class="caption">Figure 3: Translating ground movement into hazard data </div>
+                <div class="caption">Figure 2: P-waves arrive first (Primary); S-waves follow and cause more surface shaking.</div>
     </div>
 </section>
 
 <section data-reveal>
     <div class="content-text">
-        <h2>Interactive Simulation</h2>
-        <p>Our project model demonstrates how seismic waves impact infrastructure. Use the control below to simulate a seismic event and observe the shaking effect on the buildings above the fault line[cite: 7, 25].</p>
-        <button onclick="triggerQuake()">Simulate Earthquake</button>
+        <h2>Week 4: India's New Hazard Map</h2>
+        <p>The Bureau of Indian Standards (BIS) updated the map in <b>2025</b>, introducing <b>Zone VI</b> for the highest risk areas like the entire Himalayan arc.</p>
+        <ul>
+            <li>61% of India's landmass is now in moderate-to-high risk zones.</li>
+            <li>Zone VI covers the Himalayas from J&K to Arunachal Pradesh.</li>
+        </ul>
+    </div>
+    <div class="visual-container">
+                <div class="caption">Figure 3: India's updated 2025 Zonation Map showing Zone VI.</div>
+    </div>
+</section>
+
+<section data-reveal>
+    <div class="content-text">
+        <h2>Interactive Simulator</h2>
+        <p>Trigger the simulator to see how ground displacement causes infrastructure to vibrate. This reflects the "Drop, Cover, and Hold On" protocol.</p>
+        <button onclick="triggerQuake()">Trigger Seismic Event</button>
     </div>
     <div class="visual-container">
         <div class="quake-stage" id="stage">
@@ -232,66 +240,27 @@
             </div>
             <div class="ground-layer"></div>
         </div>
-        <div class="caption">Experimental Model: Infrastructure stress test [cite: 7]</div>
-    </div>
-</section>
-
-<section data-reveal>
-    <div class="content-text">
-        <h2>Week 4: Localized Risk in India</h2>
-        <p>We plotted India's seismic zones (from Zone II to Zone V) on the Richter Scale. We concluded that public awareness and understanding of instrumentation are the most critical steps for national safety[cite: 19].</p>
-    </div>
-    <div class="visual-container">
-        
-        <div class="caption">Figure 4: India’s vulnerability profile by region </div>
-    </div>
-</section>
-
-<section data-reveal style="background: linear-gradient(to bottom right, #1e3a8a, #1e1b4b); grid-template-columns: 1fr;">
-    <div class="content-text" style="text-align: center;">
-        <h2 style="color: #fbbf24;">Essential Safety & Preparedness [cite: 20, 23]</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px;">
-            <div class="visual-container" style="background: rgba(255,255,255,0.05);">
-                <h3>DROP, COVER, HOLD ON</h3>
-                <p>Get low, seek cover under sturdy furniture, and hold firm[cite: 25].</p>
-            </div>
-            <div class="visual-container" style="background: rgba(255,255,255,0.05);">
-                <h3>AVOID HAZARDS</h3>
-                <p>Stay away from glass, windows, and unsecured tall furniture[cite: 26].</p>
-            </div>
-            <div class="visual-container" style="background: rgba(255,255,255,0.05);">
-                <h3>EMERGENCY KIT</h3>
-                <p>Keep a stocked kit with water, food, and first-aid supplies ready[cite: 27].</p>
-            </div>
-        </div>
     </div>
 </section>
 
 <footer>
-    <p><b>The Global Seismic Venture</b></p>
-    <p style="color: var(--text-dim);">CBSE / ICSE Experimental Learning Project – Geography</p>
+    <p><b>Team: Shrijal • Ajitendra • Vaidik • Inisha</b></p>
+    <p>Experimental Learning Project – Geography 2025</p>
 </footer>
 
 <script>
-    // Reveal Observer
-    const observerOptions = { threshold: 0.2 };
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+            if (entry.isIntersecting) entry.target.classList.add('visible');
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
     document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
 
-    // Quake Logic
     function triggerQuake() {
         const stage = document.getElementById('stage');
         stage.classList.add('shaking');
-        setTimeout(() => {
-            stage.classList.remove('shaking');
-        }, 2000);
+        setTimeout(() => stage.classList.remove('shaking'), 2000);
     }
 </script>
 
