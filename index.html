@@ -6,93 +6,105 @@
 <title>The Global Seismic Venture</title>
 
 <style>
-/* ============ THEME ============ */
+/* ================= THEME ================= */
 :root{
-  --bg:linear-gradient(135deg,#e8f1ff,#ffffff);
-  --accent:linear-gradient(135deg,#1565c0,#42a5f5);
-  --accent-soft:linear-gradient(135deg,#bbdefb,#e3f2fd);
-  --card:#ffffff;
+  --bg-main:linear-gradient(135deg,#e6f0ff,#ffffff);
+  --bg-section:linear-gradient(135deg,#f4f8ff,#ffffff);
+  --accent:linear-gradient(135deg,#0d47a1,#42a5f5);
+  --accent-2:linear-gradient(135deg,#64b5f6,#bbdefb);
+  --earth:linear-gradient(180deg,#a1887f,#5d4037);
   --text:#1f2937;
 }
 
-/* ============ GLOBAL ============ */
+/* ================= GLOBAL ================= */
 *{box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
 body{
   margin:0;
-  background:var(--bg);
+  background:var(--bg-main);
   color:var(--text);
   line-height:1.9;
   overflow-x:hidden;
 }
 section{
-  max-width:1100px;
-  margin:80px auto;
+  max-width:1200px;
+  margin:90px auto;
   padding:0 20px;
-  animation:fadeSlide 1s ease both;
+  animation:fadeUp 1.2s ease both;
 }
-h1,h2,h3{margin-bottom:10px}
-img{max-width:100%;border-radius:14px}
+h1,h2,h3{margin-bottom:12px}
+p{margin-bottom:14px}
 
-/* ============ HEADER ============ */
+/* ================= HEADER ================= */
 header{
+  padding:90px 20px 60px;
   text-align:center;
-  padding:70px 20px 40px;
+  background:linear-gradient(135deg,#e3f2fd,#ffffff);
 }
 header h1{
-  font-size:3.2rem;
+  font-size:3.4rem;
   background:var(--accent);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
-  animation:gradientMove 6s infinite linear;
+  animation:gradientShift 8s infinite linear;
 }
-header p{
-  max-width:900px;
-  margin:auto;
-}
+header p{max-width:950px;margin:auto}
 
-/* ============ CARDS ============ */
+/* ================= CARD ================= */
 .card{
-  background:linear-gradient(180deg,#ffffff,#f7fbff);
-  padding:32px;
-  border-radius:22px;
-  box-shadow:0 18px 40px rgba(0,0,0,.12);
-  margin-bottom:40px;
+  background:var(--bg-section);
+  padding:36px;
+  border-radius:26px;
+  box-shadow:0 25px 60px rgba(0,0,0,.15);
+  margin-bottom:50px;
   position:relative;
-  overflow:hidden;
 }
-.card::before{
+.card::after{
   content:"";
   position:absolute;
   inset:0;
-  background:var(--accent-soft);
-  opacity:.4;
+  border-radius:26px;
+  background:var(--accent-2);
+  opacity:.25;
   z-index:-1;
 }
 
-/* ============ INFO DIAGRAM BOX ============ */
-.diagram{
-  background:linear-gradient(135deg,#e3f2fd,#ffffff);
-  padding:22px;
-  border-radius:18px;
-  margin-top:20px;
-  text-align:center;
-  animation:float 4s ease-in-out infinite;
+/* ================= TIMELINE ================= */
+.timeline{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+.step{
+  padding:25px;
+  border-radius:20px;
+  background:linear-gradient(135deg,#ffffff,#e3f2fd);
+  animation:float 4s infinite ease-in-out;
 }
 
-/* ============ EARTHQUAKE MODEL ============ */
-.scene{margin-top:30px}
-.ground{position:relative;height:300px}
+/* ================= DIAGRAM ================= */
+.diagram{
+  margin-top:25px;
+  padding:25px;
+  border-radius:22px;
+  background:linear-gradient(135deg,#e3f2fd,#ffffff);
+  text-align:center;
+  animation:pulseSoft 3s infinite;
+}
+
+/* ================= EARTHQUAKE MODEL ================= */
+.scene{margin-top:50px}
+.ground{position:relative;height:320px}
 .city{
   display:flex;
   justify-content:space-evenly;
   position:absolute;
-  bottom:110px;
+  bottom:120px;
   width:100%;
 }
 .building{
-  width:50px;
-  border-radius:6px;
+  width:52px;
   background:linear-gradient(180deg,#e3ecf7,#3a4f7a);
+  border-radius:6px;
   transform-origin:bottom;
 }
 .building::after{
@@ -105,57 +117,57 @@ header p{
     transparent 10px 18px
   );
 }
-.tall{height:170px}
-.mid{height:135px}
-.short{height:105px}
+.tall{height:180px}
+.mid{height:145px}
+.short{height:110px}
 
 /* EARTH */
 .surface{
   position:absolute;
-  bottom:90px;
-  height:22px;
+  bottom:100px;
+  height:25px;
   width:100%;
-  background:linear-gradient(90deg,#a1887f,#6d4c41);
+  background:linear-gradient(90deg,#8d6e63,#4e342e);
 }
 .plate{
   position:absolute;
   bottom:0;
-  height:90px;
+  height:100px;
   width:50%;
-  background:linear-gradient(180deg,#bcaaa4,#5d4037);
+  background:var(--earth);
 }
 .left{left:0}
 .right{right:0}
 
-/* FOCUS & EPICENTER */
+/* FOCUS / EPICENTER */
 .focus,.epicenter{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  width:14px;
-  height:14px;
+  width:15px;
+  height:15px;
   border-radius:50%;
   opacity:0;
 }
 .focus{
-  bottom:45px;
+  bottom:55px;
   background:#e53935;
-  animation:pulse 1.5s infinite;
+  animation:pulse 1.6s infinite;
 }
 .epicenter{
-  bottom:110px;
+  bottom:125px;
   background:#fb8c00;
-  animation:pulse 1.5s infinite;
+  animation:pulse 1.6s infinite;
 }
 .label{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
   background:white;
-  padding:5px 12px;
-  border-radius:10px;
-  font-size:.85rem;
-  box-shadow:0 8px 18px rgba(0,0,0,.2);
+  padding:6px 14px;
+  border-radius:12px;
+  font-size:.9rem;
+  box-shadow:0 10px 20px rgba(0,0,0,.25);
   opacity:0;
 }
 
@@ -167,27 +179,25 @@ header p{
 .quake .epicenter,
 .quake .label{opacity:1}
 
-/* BUTTON */
-.controls{text-align:center;margin-top:25px}
+/* ================= BUTTON ================= */
+.controls{text-align:center;margin-top:30px}
 button{
   background:var(--accent);
   border:none;
-  padding:15px 38px;
+  padding:16px 44px;
+  border-radius:35px;
   color:white;
-  border-radius:30px;
-  font-size:1.05rem;
+  font-size:1.1rem;
   cursor:pointer;
-  box-shadow:0 14px 30px rgba(0,0,0,.3);
+  box-shadow:0 16px 40px rgba(0,0,0,.3);
   transition:.3s;
 }
-button:hover{
-  transform:translateY(-3px) scale(1.03);
-}
+button:hover{transform:translateY(-4px) scale(1.05)}
 
-/* FOOTER */
-footer{text-align:center;padding:30px;opacity:.75}
+/* ================= FOOTER ================= */
+footer{text-align:center;padding:40px;opacity:.75}
 
-/* ============ ANIMATIONS ============ */
+/* ================= ANIMATIONS ================= */
 @keyframes shake{
   0%{transform:rotate(0)}
   25%{transform:rotate(2deg)}
@@ -195,21 +205,25 @@ footer{text-align:center;padding:30px;opacity:.75}
   75%{transform:rotate(1deg)}
   100%{transform:rotate(0)}
 }
-@keyframes leftMove{50%{transform:translateX(25px)}}
-@keyframes rightMove{50%{transform:translateX(-25px)}}
-@keyframes fadeSlide{
-  from{opacity:0;transform:translateY(40px)}
+@keyframes leftMove{50%{transform:translateX(28px)}}
+@keyframes rightMove{50%{transform:translateX(-28px)}}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(50px)}
   to{opacity:1;transform:translateY(0)}
 }
 @keyframes float{
   0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
+  50%{transform:translateY(-12px)}
 }
 @keyframes pulse{
   0%{box-shadow:0 0 0 0 rgba(229,57,53,.6)}
-  100%{box-shadow:0 0 0 15px transparent}
+  100%{box-shadow:0 0 0 18px transparent}
 }
-@keyframes gradientMove{
+@keyframes pulseSoft{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.02)}
+}
+@keyframes gradientShift{
   0%{filter:hue-rotate(0deg)}
   100%{filter:hue-rotate(360deg)}
 }
@@ -222,7 +236,7 @@ footer{text-align:center;padding:30px;opacity:.75}
 <h1>The Global Seismic Venture</h1>
 <p>
 An <b>Experimental Learning Project</b> exploring earthquakes through
-science, geography, and human impact.
+geography, science, data analysis, and human preparedness.
 </p>
 <p><b>Team:</b> Shrijal • Ajitendra • Vaidik • Inisha</p>
 </header>
@@ -230,39 +244,55 @@ science, geography, and human impact.
 <section class="card">
 <h2>Introduction</h2>
 <p>
-Earthquakes occur due to sudden movements within the Earth’s crust.
-They release enormous energy that travels as seismic waves, causing
-the ground to shake and structures to collapse.
+Earthquakes are sudden vibrations of the Earth’s crust caused by the
+release of stored energy along tectonic plate boundaries.
+This project studies earthquakes as both <b>natural phenomena</b>
+and <b>human disasters</b>.
 </p>
 </section>
 
 <section class="card">
-<h2>Week 1 – Case Studies & Human Impact</h2>
+<h2>Week 1 – Case Studies & Human Geography</h2>
 <p>
-Our study of Italy, Nepal, Gujarat, and Turkey showed that the same
-magnitude earthquake can cause very different damage depending on
-preparedness, construction quality, and economic conditions.
+Our analysis of earthquakes in Italy, Nepal, Gujarat, and Turkey showed
+that the same magnitude earthquake can have very different impacts.
 </p>
-<div class="diagram">
-<b>Key Observation</b><br>
-Prepared regions → Less damage<br>
-Unprepared regions → Severe loss
+<div class="timeline">
+<div class="step">✔ Strong building codes reduce damage</div>
+<div class="step">✔ Emergency response saves lives</div>
+<div class="step">✔ Poverty increases vulnerability</div>
 </div>
 </section>
 
 <section class="card">
 <h2>Week 2 – Plate Tectonics</h2>
 <p>
-The Earth’s crust is broken into tectonic plates that move slowly.
-Earthquakes mainly occur at convergent, divergent, and transform boundaries.
+The Earth’s lithosphere is divided into tectonic plates that move
+slowly over the asthenosphere. Stress builds up at plate boundaries.
 </p>
+<div class="diagram">
+<b>Plate Boundaries</b><br>
+Convergent • Divergent • Transform
+</div>
+</section>
+
+<section class="card">
+<h2>Week 3 – Seismology & Measurement</h2>
+<p>
+Seismology uses seismic waves to measure earthquakes.
+P-waves travel fastest, while S-waves are slower but more destructive.
+</p>
+<div class="diagram">
+<b>Focus</b> → Origin of earthquake<br>
+<b>Epicenter</b> → Point on surface
+</div>
 </section>
 
 <section class="card scene" id="scene">
-<h2>Experimental Earthquake Model</h2>
+<h2>Interactive Earthquake Model</h2>
 <p>
-This model visually demonstrates tectonic movement, the focus,
-and the epicenter.
+This experimental model visually demonstrates tectonic movement,
+ground shaking, and the location of the focus and epicenter.
 </p>
 
 <div class="ground">
@@ -279,8 +309,8 @@ and the epicenter.
 <div class="plate right"></div>
 <div class="focus"></div>
 <div class="epicenter"></div>
-<div class="label" style="bottom:25px">Focus</div>
-<div class="label" style="bottom:140px">Epicenter</div>
+<div class="label" style="bottom:30px">Focus</div>
+<div class="label" style="bottom:150px">Epicenter</div>
 </div>
 
 <div class="controls">
@@ -291,12 +321,20 @@ Trigger Earthquake
 </section>
 
 <section class="card">
-<h2>Safety Measures</h2>
-<ol>
+<h2>Week 4 – Earthquake Risk in India</h2>
+<p>
+India is divided into seismic zones ranging from Zone II to Zone V.
+Zone V areas such as the Himalayas are most earthquake-prone.
+</p>
+</section>
+
+<section class="card">
+<h2>Safety & Preparedness</h2>
+<ul>
 <li>Drop, Cover, and Hold On</li>
-<li>Avoid windows and heavy furniture</li>
-<li>Maintain an emergency kit</li>
-</ol>
+<li>Move to open areas if outdoors</li>
+<li>Keep an emergency kit ready</li>
+</ul>
 </section>
 
 <footer>
