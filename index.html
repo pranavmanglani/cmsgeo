@@ -3,212 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Global Seismic Venture - Advanced Edition</title>
+    <title>The Global Seismic Venture - Final Edition</title>
     <style>
         :root {
             --primary: #0f172a;
-            --accent: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --accent: #3b82f6;
             --glass: rgba(255, 255, 255, 0.03);
             --text-main: #f8fafc;
             --text-dim: #94a3b8;
-            --window: rgba(255, 255, 255, 0.2);
         }
-
-        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
         body {
             margin: 0;
             background-color: var(--primary);
             color: var(--text-main);
-            line-height: 1.7;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
         }
 
-        section {
-            max-width: 1100px;
-            margin: 80px auto;
-            padding: 40px;
-            background: var(--glass);
-            border-radius: 30px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            align-items: center;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
 
-        /* --- Interactive Simulator Styles --- */
-        .sim-container {
-            position: relative;
-            height: 400px;
+        /* --- Simulator --- */
+        .sim-box {
             background: #020617;
+            height: 450px;
             border-radius: 20px;
+            position: relative;
             overflow: hidden;
             border: 2px solid #1e293b;
+            margin: 40px 0;
         }
 
-        .sky { height: 60%; position: relative; }
+        .sky { height: 250px; position: relative; border-bottom: 4px solid #22c55e; }
         
-        .ground-block {
-            height: 40%;
-            background: linear-gradient(#4a2c2a, #2a1817);
-            position: relative;
-            border-top: 4px solid #22c55e; /* Grass layer */
-        }
-
-        /* Buildings */
-        .city-row {
+        .city-line {
             position: absolute;
             bottom: 0;
             width: 100%;
             display: flex;
             justify-content: space-around;
             align-items: flex-end;
-            padding: 0 10px;
-            z-index: 5;
+            padding: 0 20px;
         }
 
         .building {
             background: #334155;
+            width: 50px;
+            transition: transform 1s ease-in-out, margin-bottom 1s ease-in-out;
             position: relative;
-            transition: all 0.5s ease;
-            display: flex;
-            flex-wrap: wrap;
-            padding: 5px;
-            gap: 3px;
-            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Window details */
-        .building::before {
+        /* Windows */
+        .building::after {
             content: "";
             position: absolute;
-            top: 2px; left: 2px; right: 2px; bottom: 2px;
-            background-image: radial-gradient(var(--window) 20%, transparent 20%);
-            background-size: 8px 10px;
+            width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255,255,255,0.2) 15%, transparent 20%);
+            background-size: 10px 15px;
         }
 
-        .tall { width: 45px; height: 120px; }
-        .mid { width: 40px; height: 70px; }
-        .small { width: 30px; height: 40px; background: #475569; }
+        .b-tall { height: 160px; }
+        .b-mid { height: 100px; }
+        .b-small { height: 50px; width: 40px; }
+
+        /* The "Crumble" Animation */
+        .sim-box.active-quake .building.fail {
+            transform: rotate(25deg);
+            margin-bottom: -40px; /* Sinks into ground */
+            filter: brightness(0.5);
+        }
+
+        .sim-box.active-quake .sky {
+            animation: shake 0.1s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(2px, 2px); }
+            50% { transform: translate(-2px, -1px); }
+            100% { transform: translate(1px, -2px); }
+        }
 
         /* Seismic Markers */
-        .marker {
+        .epicenter-point {
             position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            text-align: center;
-            font-size: 10px;
-            font-weight: bold;
-            color: white;
+            bottom: -10px; left: 50%;
+            width: 20px; height: 20px;
+            background: red; border-radius: 50%;
+            box-shadow: 0 0 20px red;
             z-index: 10;
         }
 
-        .epicenter {
-            top: -12px;
-            width: 20px;
-            height: 20px;
-            background: rgba(239, 68, 68, 0.8);
-            border-radius: 50%;
-            box-shadow: 0 0 15px #ef4444;
-        }
-
-        .focus {
-            bottom: 30%;
-            width: 12px;
-            height: 12px;
-            background: #f59e0b;
-            border-radius: 50%;
-            box-shadow: 0 0 20px #f59e0b;
-        }
-
-        .label-tag {
+        .focus-point {
             position: absolute;
-            background: rgba(0,0,0,0.7);
-            padding: 2px 6px;
-            border-radius: 4px;
-            white-space: nowrap;
+            top: 80px; left: 50%;
+            width: 15px; height: 15px;
+            background: orange; border-radius: 50%;
+            box-shadow: 0 0 30px orange;
         }
 
-        /* Animation States */
-        .shaking .ground-block, .shaking .city-row {
-            animation: quakeMove 0.15s infinite;
+        /* --- Quiz Section --- */
+        .quiz-card {
+            background: var(--glass);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-top: 50px;
         }
 
-        .shaking .crumble {
-            transform: rotate(15deg) translateY(20px);
-            opacity: 0.8;
-            filter: blur(1px);
-        }
-
-        @keyframes quakeMove {
-            0% { transform: translate(2px, 1px); }
-            50% { transform: translate(-2px, -1px); }
-            100% { transform: translate(0, 0); }
-        }
-
-        button {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 25px;
+        .question { margin-bottom: 20px; display: none; }
+        .question.active { display: block; }
+        
+        .opt {
+            display: block;
+            background: rgba(255,255,255,0.05);
+            padding: 12px;
+            margin: 8px 0;
             border-radius: 8px;
             cursor: pointer;
-            font-weight: bold;
-            margin-top: 20px;
+            transition: 0.2s;
         }
 
-        @media (max-width: 850px) {
-            section { grid-template-columns: 1fr; }
+        .opt:hover { background: rgba(59, 130, 246, 0.2); }
+
+        .btn {
+            background: var(--accent);
+            color: white; border: none;
+            padding: 12px 24px; border-radius: 8px;
+            cursor: pointer; font-weight: bold;
         }
+
+        .map-container { text-align: center; margin: 40px 0; }
+        .map-container img { max-width: 100%; border-radius: 15px; border: 1px solid #334155; }
     </style>
 </head>
 <body>
 
-<section>
-    <div>
-        <h2>Interactive Seismic Model</h2>
-        <p>In our project, we focused on three key components of an earthquake:</p>
-        <ul>
-            <li><b>The Focus (Hypocenter):</b> The point inside the Earth where the rupture starts.</li>
-            <li><b>The Epicenter:</b> The point directly above the focus on the surface, where shaking is often strongest.</li>
-            <li><b>Structural Failure:</b> Note how taller buildings or those with poor foundations (represented by the "crumbling" effect) react differently to the release of energy.</li>
-        </ul>
-        <button onclick="startQuake()">Trigger Earthquake</button>
+<div class="container">
+    <h1>The Global Seismic Venture</h1>
+
+    <div class="map-container">
+        <h2>India's Seismic Zonation Map (Updated)</h2>
+        
+        <img src="https://www.researchgate.net/profile/S-K-Nath/publication/225154388/figure/fig1/AS:302251703685121@1449073673752/Seismic-zonation-map-of-India-BIS-1893-Part-I-2002.png" alt="Seismic Map of India" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/India_seismic_zone_map.svg/800px-India_seismic_zone_map.svg.png'">
+        <p style="color: var(--text-dim); font-size: 0.9rem;">Zone V (Red) indicates the highest risk areas including the Himalayan belt.</p>
     </div>
 
-    <div class="sim-container" id="sim">
+    <div class="sim-box" id="sim">
         <div class="sky">
-            <div class="city-row">
-                <div class="building tall"></div>
-                <div class="building mid crumble"></div> <div class="building small"></div>
-                <div class="building tall crumble"></div> <div class="building mid"></div>
+            <div class="city-line">
+                <div class="building b-tall"></div>
+                <div class="building b-mid fail"></div> <div class="building b-small"></div>
+                <div class="building b-tall fail"></div> <div class="building b-mid"></div>
             </div>
-            <div class="marker" style="top: 100%; transform: translate(-50%, -50%);">
-                <div class="epicenter"></div>
-                <span class="label-tag" style="top: -25px; left: 50%; transform: translateX(-50%);">EPICENTER</span>
-            </div>
+            <div class="epicenter-point"></div>
+            <div style="position:absolute; bottom: 15px; left: 52%; font-size: 12px; color: red; font-weight: bold;">EPICENTER</div>
         </div>
-
-        <div class="ground-block">
-            <div class="marker" style="top: 50%;">
-                <div class="focus"></div>
-                <span class="label-tag" style="top: 15px; left: 50%; transform: translateX(-50%);">FOCUS (Hypocenter)</span>
-            </div>
+        <div class="ground" style="height: 200px; background: #2a1817; position: relative;">
+            <div class="focus-point"></div>
+            <div style="position:absolute; top: 95px; left: 52%; font-size: 12px; color: orange; font-weight: bold;">FOCUS (Hypocenter)</div>
         </div>
     </div>
-</section>
+    
+    <button class="btn" onclick="triggerQuake()">Trigger Seismic Event</button>
 
-
+    <div class="quiz-card">
+        <h2>Seismic Knowledge Quiz</h2>
+        <div id="quiz-container">
+            <div class="question active" id="q1">
+                <p>1. Which wave is the fastest and arrives first at a seismic station?</p>
+                <div class="opt" onclick="checkAnswer(1, 'P-Wave', 'q1', 'q2')">S-Wave</div>
+                <div class="opt" onclick="checkAnswer(1, 'P-Wave', 'q1', 'q2')">P-Wave</div>
+                <div class="opt" onclick="checkAnswer(1, 'P-Wave', 'q1', 'q2')">Surface Wave</div>
+            </div>
+            <div class="question" id="q2">
+                <p>2. What is the point directly above the focus on the Earth's surface called?</p>
+                <div class="opt" onclick="checkAnswer(2, 'Epicenter', 'q2', 'q3')">Fault Line</div>
+                <div class="opt" onclick="checkAnswer(2, 'Epicenter', 'q2', 'q3')">Epicenter</div>
+                <div class="opt" onclick="checkAnswer(2, 'Epicenter', 'q2', 'q3')">Lithosphere</div>
+            </div>
+            <div class="question" id="q3">
+                <p>3. Which seismic zone in India represents the highest risk?</p>
+                <div class="opt" onclick="checkAnswer(3, 'Zone V', 'q3', 'end')">Zone II</div>
+                <div class="opt" onclick="checkAnswer(3, 'Zone V', 'q3', 'end')">Zone IV</div>
+                <div class="opt" onclick="checkAnswer(3, 'Zone V', 'q3', 'end')">Zone V</div>
+            </div>
+            <div id="quiz-result"></div>
+        </div>
+    </div>
+</div>
 
 <script>
-    function startQuake() {
+    function triggerQuake() {
         const sim = document.getElementById('sim');
-        sim.classList.add('shaking');
-        
-        // After 3 seconds, stop the shaking but keep the buildings "crumbled"
+        sim.classList.add('active-quake');
         setTimeout(() => {
-            sim.classList.remove('shaking');
+            sim.classList.remove('active-quake');
         }, 3000);
+    }
+
+    let score = 0;
+    function checkAnswer(qNum, correct, currentId, nextId) {
+        const selection = event.target.innerText;
+        if(selection === correct) {
+            score++;
+            alert("Correct!");
+        } else {
+            alert("Incorrect. The correct answer was " + correct);
+        }
+
+        document.getElementById(currentId).classList.remove('active');
+        if(nextId === 'end') {
+            document.getElementById('quiz-result').innerHTML = `<h3>Quiz Complete! Your Score: ${score}/3</h3>`;
+        } else {
+            document.getElementById(nextId).classList.add('active');
+        }
     }
 </script>
 
