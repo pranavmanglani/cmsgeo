@@ -6,76 +6,188 @@
 <title>The Global Seismic Venture</title>
 
 <style>
+/* ============ THEME ============ */
 :root{
-  --bg:linear-gradient(135deg,#eef5ff,#ffffff);
+  --bg:linear-gradient(135deg,#e8f1ff,#ffffff);
   --accent:linear-gradient(135deg,#1565c0,#42a5f5);
+  --accent-soft:linear-gradient(135deg,#bbdefb,#e3f2fd);
   --card:#ffffff;
   --text:#1f2937;
 }
+
+/* ============ GLOBAL ============ */
 *{box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-body{margin:0;background:var(--bg);color:var(--text);line-height:1.8}
-section{max-width:1100px;margin:70px auto;padding:0 20px}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.9;
+  overflow-x:hidden;
+}
+section{
+  max-width:1100px;
+  margin:80px auto;
+  padding:0 20px;
+  animation:fadeSlide 1s ease both;
+}
 h1,h2,h3{margin-bottom:10px}
-.card{
-  background:var(--card);
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 12px 30px rgba(0,0,0,.12);
-  margin-bottom:40px;
-}
-img{max-width:100%;border-radius:14px;margin-top:15px}
-.diagram{
-  background:#f4f8ff;
-  padding:20px;
-  border-radius:16px;
-  margin-top:20px;
+img{max-width:100%;border-radius:14px}
+
+/* ============ HEADER ============ */
+header{
   text-align:center;
+  padding:70px 20px 40px;
 }
-header{text-align:center;padding:60px 20px}
 header h1{
-  font-size:3rem;
+  font-size:3.2rem;
   background:var(--accent);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
+  animation:gradientMove 6s infinite linear;
 }
-header p{max-width:900px;margin:auto}
+header p{
+  max-width:900px;
+  margin:auto;
+}
 
-/* Earthquake Model */
-.scene{margin-top:40px}
-.ground{position:relative;height:280px}
-.city{display:flex;justify-content:space-evenly;position:absolute;bottom:100px;width:100%}
+/* ============ CARDS ============ */
+.card{
+  background:linear-gradient(180deg,#ffffff,#f7fbff);
+  padding:32px;
+  border-radius:22px;
+  box-shadow:0 18px 40px rgba(0,0,0,.12);
+  margin-bottom:40px;
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:var(--accent-soft);
+  opacity:.4;
+  z-index:-1;
+}
+
+/* ============ INFO DIAGRAM BOX ============ */
+.diagram{
+  background:linear-gradient(135deg,#e3f2fd,#ffffff);
+  padding:22px;
+  border-radius:18px;
+  margin-top:20px;
+  text-align:center;
+  animation:float 4s ease-in-out infinite;
+}
+
+/* ============ EARTHQUAKE MODEL ============ */
+.scene{margin-top:30px}
+.ground{position:relative;height:300px}
+.city{
+  display:flex;
+  justify-content:space-evenly;
+  position:absolute;
+  bottom:110px;
+  width:100%;
+}
 .building{
-  width:50px;border-radius:6px;
-  background:linear-gradient(180deg,#d7e1ec,#3a4f7a);
+  width:50px;
+  border-radius:6px;
+  background:linear-gradient(180deg,#e3ecf7,#3a4f7a);
   transform-origin:bottom;
 }
 .building::after{
-  content:"";display:block;height:80%;margin:8px;
+  content:"";
+  display:block;
+  height:80%;
+  margin:8px;
   background:repeating-linear-gradient(
-    rgba(255,255,255,.5) 0 10px,
+    rgba(255,255,255,.6) 0 10px,
     transparent 10px 18px
   );
 }
-.tall{height:160px}.mid{height:130px}.short{height:100px}
-.surface{position:absolute;bottom:80px;height:20px;width:100%;background:#8d6e63}
-.plate{position:absolute;bottom:0;height:80px;width:50%;background:linear-gradient(#a1887f,#5d4037)}
-.left{left:0}.right{right:0}
+.tall{height:170px}
+.mid{height:135px}
+.short{height:105px}
+
+/* EARTH */
+.surface{
+  position:absolute;
+  bottom:90px;
+  height:22px;
+  width:100%;
+  background:linear-gradient(90deg,#a1887f,#6d4c41);
+}
+.plate{
+  position:absolute;
+  bottom:0;
+  height:90px;
+  width:50%;
+  background:linear-gradient(180deg,#bcaaa4,#5d4037);
+}
+.left{left:0}
+.right{right:0}
+
+/* FOCUS & EPICENTER */
 .focus,.epicenter{
-  position:absolute;left:50%;transform:translateX(-50%);
-  width:14px;height:14px;border-radius:50%;opacity:0
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  opacity:0;
 }
-.focus{bottom:40px;background:#e53935}
-.epicenter{bottom:100px;background:#fb8c00}
+.focus{
+  bottom:45px;
+  background:#e53935;
+  animation:pulse 1.5s infinite;
+}
+.epicenter{
+  bottom:110px;
+  background:#fb8c00;
+  animation:pulse 1.5s infinite;
+}
 .label{
-  position:absolute;left:50%;transform:translateX(-50%);
-  background:white;padding:4px 10px;border-radius:8px;
-  box-shadow:0 6px 15px rgba(0,0,0,.2);
-  font-size:.85rem;opacity:0
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  background:white;
+  padding:5px 12px;
+  border-radius:10px;
+  font-size:.85rem;
+  box-shadow:0 8px 18px rgba(0,0,0,.2);
+  opacity:0;
 }
+
+/* QUAKE */
 .quake .building{animation:shake .6s infinite}
 .quake .left{animation:leftMove 2s infinite}
 .quake .right{animation:rightMove 2s infinite}
-.quake .focus,.quake .epicenter,.quake .label{opacity:1}
+.quake .focus,
+.quake .epicenter,
+.quake .label{opacity:1}
+
+/* BUTTON */
+.controls{text-align:center;margin-top:25px}
+button{
+  background:var(--accent);
+  border:none;
+  padding:15px 38px;
+  color:white;
+  border-radius:30px;
+  font-size:1.05rem;
+  cursor:pointer;
+  box-shadow:0 14px 30px rgba(0,0,0,.3);
+  transition:.3s;
+}
+button:hover{
+  transform:translateY(-3px) scale(1.03);
+}
+
+/* FOOTER */
+footer{text-align:center;padding:30px;opacity:.75}
+
+/* ============ ANIMATIONS ============ */
 @keyframes shake{
   0%{transform:rotate(0)}
   25%{transform:rotate(2deg)}
@@ -83,16 +195,24 @@ header p{max-width:900px;margin:auto}
   75%{transform:rotate(1deg)}
   100%{transform:rotate(0)}
 }
-@keyframes leftMove{50%{transform:translateX(20px)}}
-@keyframes rightMove{50%{transform:translateX(-20px)}}
-.controls{text-align:center;margin-top:20px}
-button{
-  background:var(--accent);border:none;color:white;
-  padding:14px 36px;border-radius:30px;
-  font-size:1rem;cursor:pointer;
-  box-shadow:0 10px 25px rgba(0,0,0,.25)
+@keyframes leftMove{50%{transform:translateX(25px)}}
+@keyframes rightMove{50%{transform:translateX(-25px)}}
+@keyframes fadeSlide{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
 }
-footer{text-align:center;padding:30px;opacity:.7}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(229,57,53,.6)}
+  100%{box-shadow:0 0 0 15px transparent}
+}
+@keyframes gradientMove{
+  0%{filter:hue-rotate(0deg)}
+  100%{filter:hue-rotate(360deg)}
+}
 </style>
 </head>
 
@@ -101,83 +221,50 @@ footer{text-align:center;padding:30px;opacity:.7}
 <header>
 <h1>The Global Seismic Venture</h1>
 <p>
-An <b>Experimental Learning Project (ELP)</b> focusing on earthquakes,
-their causes, effects, and impact on human life.
+An <b>Experimental Learning Project</b> exploring earthquakes through
+science, geography, and human impact.
 </p>
-<p><b>Presented by:</b> Shrijal, Ajitendra, Vaidik & Inisha</p>
+<p><b>Team:</b> Shrijal • Ajitendra • Vaidik • Inisha</p>
 </header>
 
 <section class="card">
 <h2>Introduction</h2>
 <p>
-Earthquakes are among the most destructive natural disasters on Earth.
-They occur due to sudden movements within the Earth’s crust.
-This project aims to understand earthquakes not only as geological events,
-but also as phenomena that deeply affect human society and development.
+Earthquakes occur due to sudden movements within the Earth’s crust.
+They release enormous energy that travels as seismic waves, causing
+the ground to shake and structures to collapse.
 </p>
 </section>
 
 <section class="card">
 <h2>Week 1 – Case Studies & Human Impact</h2>
 <p>
-In the first week, we studied earthquakes in Italy, Nepal, Gujarat, and Turkey.
-We observed that regions with similar earthquake magnitudes experienced
-different levels of destruction.
-</p>
-<p>
-This led us to understand that <b>human preparedness, building standards,
-economic strength, and emergency response</b> play a crucial role in reducing
-loss of life and property.
+Our study of Italy, Nepal, Gujarat, and Turkey showed that the same
+magnitude earthquake can cause very different damage depending on
+preparedness, construction quality, and economic conditions.
 </p>
 <div class="diagram">
-<b>Case Study Comparison (Conceptual)</b><br>
-High preparedness → Less damage<br>
-Low preparedness → Severe destruction
+<b>Key Observation</b><br>
+Prepared regions → Less damage<br>
+Unprepared regions → Severe loss
 </div>
 </section>
 
 <section class="card">
 <h2>Week 2 – Plate Tectonics</h2>
 <p>
-The Earth’s crust is divided into tectonic plates that float over the mantle.
-These plates are constantly moving, though very slowly.
-</p>
-<p>
-Earthquakes occur mainly along plate boundaries:
-</p>
-<ul>
-<li><b>Convergent boundaries</b> – plates collide</li>
-<li><b>Divergent boundaries</b> – plates move apart</li>
-<li><b>Transform boundaries</b> – plates slide past each other</li>
-</ul>
-<div class="diagram">
-<b>Diagram: Plate Boundary Types</b><br>
-(Convergent • Divergent • Transform)
-</div>
-</section>
-
-<section class="card">
-<h2>Week 3 – Seismology & Earthquake Measurement</h2>
-<p>
-Seismology is the scientific study of earthquakes.
-Earthquakes produce seismic waves that travel through the Earth.
-</p>
-<ul>
-<li><b>P-waves</b> – fastest, travel through solids and liquids</li>
-<li><b>S-waves</b> – slower, travel only through solids</li>
-</ul>
-<p>
-The <b>focus (hypocenter)</b> is the point inside the Earth where the earthquake
-originates, while the <b>epicenter</b> is the point directly above it on the surface.
+The Earth’s crust is broken into tectonic plates that move slowly.
+Earthquakes mainly occur at convergent, divergent, and transform boundaries.
 </p>
 </section>
 
 <section class="card scene" id="scene">
 <h2>Experimental Earthquake Model</h2>
 <p>
-This interactive model demonstrates how tectonic plate movement causes
-earthquakes and affects structures on the surface.
+This model visually demonstrates tectonic movement, the focus,
+and the epicenter.
 </p>
+
 <div class="ground">
 <div class="city">
 <div class="building tall"></div>
@@ -186,37 +273,29 @@ earthquakes and affects structures on the surface.
 <div class="building mid"></div>
 <div class="building tall"></div>
 </div>
+
 <div class="surface"></div>
 <div class="plate left"></div>
 <div class="plate right"></div>
 <div class="focus"></div>
 <div class="epicenter"></div>
-<div class="label" style="bottom:20px">Focus</div>
-<div class="label" style="bottom:130px">Epicenter</div>
+<div class="label" style="bottom:25px">Focus</div>
+<div class="label" style="bottom:140px">Epicenter</div>
 </div>
-<div class="controls">
-<button onclick="scene.classList.toggle('quake')">Trigger Earthquake</button>
-</div>
-</section>
 
-<section class="card">
-<h2>Week 4 – Earthquake Risk in India</h2>
-<p>
-India is divided into seismic zones based on earthquake risk.
-Zone V is the most active, while Zone II is the least active.
-</p>
-<p>
-Understanding local seismic zones helps in designing safer buildings
-and improving disaster preparedness.
-</p>
+<div class="controls">
+<button onclick="scene.classList.toggle('quake')">
+Trigger Earthquake
+</button>
+</div>
 </section>
 
 <section class="card">
 <h2>Safety Measures</h2>
 <ol>
-<li><b>Drop, Cover, and Hold On</b> during shaking</li>
-<li>Stay away from windows and heavy furniture</li>
-<li>Keep an emergency kit ready</li>
+<li>Drop, Cover, and Hold On</li>
+<li>Avoid windows and heavy furniture</li>
+<li>Maintain an emergency kit</li>
 </ol>
 </section>
 
