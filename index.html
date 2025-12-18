@@ -1,350 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Global Seismic Venture</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Global Seismic Venture</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --accent: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            --glass: rgba(255, 255, 255, 0.03);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+        }
 
-<style>
-/* ================= THEME ================= */
-:root{
-  --bg-main:linear-gradient(135deg,#e6f0ff,#ffffff);
-  --bg-section:linear-gradient(135deg,#f4f8ff,#ffffff);
-  --accent:linear-gradient(135deg,#0d47a1,#42a5f5);
-  --accent-2:linear-gradient(135deg,#64b5f6,#bbdefb);
-  --earth:linear-gradient(180deg,#a1887f,#5d4037);
-  --text:#1f2937;
-}
+        * { box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
 
-/* ================= GLOBAL ================= */
-*{box-sizing:border-box;font-family:Segoe UI,Arial,sans-serif}
-body{
-  margin:0;
-  background:var(--bg-main);
-  color:var(--text);
-  line-height:1.9;
-  overflow-x:hidden;
-}
-section{
-  max-width:1200px;
-  margin:90px auto;
-  padding:0 20px;
-  animation:fadeUp 1.2s ease both;
-}
-h1,h2,h3{margin-bottom:12px}
-p{margin-bottom:14px}
+        body {
+            margin: 0;
+            background-color: var(--primary);
+            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
 
-/* ================= HEADER ================= */
-header{
-  padding:90px 20px 60px;
-  text-align:center;
-  background:linear-gradient(135deg,#e3f2fd,#ffffff);
-}
-header h1{
-  font-size:3.4rem;
-  background:var(--accent);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:gradientShift 8s infinite linear;
-}
-header p{max-width:950px;margin:auto}
+        /* --- Animations --- */
+        [data-reveal] {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+        }
 
-/* ================= CARD ================= */
-.card{
-  background:var(--bg-section);
-  padding:36px;
-  border-radius:26px;
-  box-shadow:0 25px 60px rgba(0,0,0,.15);
-  margin-bottom:50px;
-  position:relative;
-}
-.card::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  border-radius:26px;
-  background:var(--accent-2);
-  opacity:.25;
-  z-index:-1;
-}
+        [data-reveal].visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-/* ================= TIMELINE ================= */
-.timeline{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:30px;
-}
-.step{
-  padding:25px;
-  border-radius:20px;
-  background:linear-gradient(135deg,#ffffff,#e3f2fd);
-  animation:float 4s infinite ease-in-out;
-}
+        /* --- Layout --- */
+        header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
 
-/* ================= DIAGRAM ================= */
-.diagram{
-  margin-top:25px;
-  padding:25px;
-  border-radius:22px;
-  background:linear-gradient(135deg,#e3f2fd,#ffffff);
-  text-align:center;
-  animation:pulseSoft 3s infinite;
-}
+        header h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin: 0;
+            background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
 
-/* ================= EARTHQUAKE MODEL ================= */
-.scene{margin-top:50px}
-.ground{position:relative;height:320px}
-.city{
-  display:flex;
-  justify-content:space-evenly;
-  position:absolute;
-  bottom:120px;
-  width:100%;
-}
-.building{
-  width:52px;
-  background:linear-gradient(180deg,#e3ecf7,#3a4f7a);
-  border-radius:6px;
-  transform-origin:bottom;
-}
-.building::after{
-  content:"";
-  display:block;
-  height:80%;
-  margin:8px;
-  background:repeating-linear-gradient(
-    rgba(255,255,255,.6) 0 10px,
-    transparent 10px 18px
-  );
-}
-.tall{height:180px}
-.mid{height:145px}
-.short{height:110px}
+        .team-box {
+            margin-top: 20px;
+            padding: 10px 30px;
+            border-radius: 50px;
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--text-dim);
+            letter-spacing: 2px;
+        }
 
-/* EARTH */
-.surface{
-  position:absolute;
-  bottom:100px;
-  height:25px;
-  width:100%;
-  background:linear-gradient(90deg,#8d6e63,#4e342e);
-}
-.plate{
-  position:absolute;
-  bottom:0;
-  height:100px;
-  width:50%;
-  background:var(--earth);
-}
-.left{left:0}
-.right{right:0}
+        section {
+            max-width: 1200px;
+            margin: 120px auto;
+            padding: 60px;
+            border-radius: 40px;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.05);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
 
-/* FOCUS / EPICENTER */
-.focus,.epicenter{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  width:15px;
-  height:15px;
-  border-radius:50%;
-  opacity:0;
-}
-.focus{
-  bottom:55px;
-  background:#e53935;
-  animation:pulse 1.6s infinite;
-}
-.epicenter{
-  bottom:125px;
-  background:#fb8c00;
-  animation:pulse 1.6s infinite;
-}
-.label{
-  position:absolute;
-  left:50%;
-  transform:translateX(-50%);
-  background:white;
-  padding:6px 14px;
-  border-radius:12px;
-  font-size:.9rem;
-  box-shadow:0 10px 20px rgba(0,0,0,.25);
-  opacity:0;
-}
+        section:nth-child(even) { direction: rtl; }
+        section:nth-child(even) .content-text { direction: ltr; }
 
-/* QUAKE */
-.quake .building{animation:shake .6s infinite}
-.quake .left{animation:leftMove 2s infinite}
-.quake .right{animation:rightMove 2s infinite}
-.quake .focus,
-.quake .epicenter,
-.quake .label{opacity:1}
+        h2 { font-size: 2.2rem; color: #60a5fa; margin-top: 0; }
+        
+        .visual-container {
+            background: rgba(0,0,0,0.2);
+            border-radius: 24px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
 
-/* ================= BUTTON ================= */
-.controls{text-align:center;margin-top:30px}
-button{
-  background:var(--accent);
-  border:none;
-  padding:16px 44px;
-  border-radius:35px;
-  color:white;
-  font-size:1.1rem;
-  cursor:pointer;
-  box-shadow:0 16px 40px rgba(0,0,0,.3);
-  transition:.3s;
-}
-button:hover{transform:translateY(-4px) scale(1.05)}
+        .visual-container img {
+            width: 100%;
+            border-radius: 16px;
+            display: block;
+        }
 
-/* ================= FOOTER ================= */
-footer{text-align:center;padding:40px;opacity:.75}
+        .caption {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+            margin-top: 15px;
+            font-style: italic;
+        }
 
-/* ================= ANIMATIONS ================= */
-@keyframes shake{
-  0%{transform:rotate(0)}
-  25%{transform:rotate(2deg)}
-  50%{transform:rotate(-2deg)}
-  75%{transform:rotate(1deg)}
-  100%{transform:rotate(0)}
-}
-@keyframes leftMove{50%{transform:translateX(28px)}}
-@keyframes rightMove{50%{transform:translateX(-28px)}}
-@keyframes fadeUp{
-  from{opacity:0;transform:translateY(50px)}
-  to{opacity:1;transform:translateY(0)}
-}
-@keyframes float{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-12px)}
-}
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(229,57,53,.6)}
-  100%{box-shadow:0 0 0 18px transparent}
-}
-@keyframes pulseSoft{
-  0%,100%{transform:scale(1)}
-  50%{transform:scale(1.02)}
-}
-@keyframes gradientShift{
-  0%{filter:hue-rotate(0deg)}
-  100%{filter:hue-rotate(360deg)}
-}
-</style>
+        /* --- Interactive Earthquake Model --- */
+        .quake-stage {
+            height: 300px;
+            background: #020617;
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buildings {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            height: 150px;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .b { width: 40px; background: linear-gradient(#334155, #1e293b); border-radius: 4px 4px 0 0; }
+        .b.tall { height: 120px; }
+        .b.mid { height: 80px; }
+        .b.short { height: 50px; }
+
+        .ground-layer {
+            height: 150px;
+            background: linear-gradient(#422006, #1a0a02);
+            position: relative;
+        }
+
+        .shaking .b { animation: jitter 0.1s infinite; }
+        @keyframes jitter {
+            0% { transform: translate(1px, 0); }
+            50% { transform: translate(-1px, 0.5px); }
+            100% { transform: translate(0, -0.5px); }
+        }
+
+        button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        button:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(37, 99, 235, 0.4); }
+
+        footer { text-align: center; padding: 100px 20px; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        @media (max-width: 900px) {
+            section { grid-template-columns: 1fr; padding: 30px; text-align: center; }
+            section:nth-child(even) { direction: ltr; }
+        }
+    </style>
 </head>
-
 <body>
 
 <header>
-<h1>The Global Seismic Venture</h1>
-<p>
-An <b>Experimental Learning Project</b> exploring earthquakes through
-geography, science, data analysis, and human preparedness.
-</p>
-<p><b>Team:</b> Pranv • Medhuvara• Arsh •Ansh </p>
+    <h1 data-reveal>The Global Seismic Venture</h1>
+    <p style="max-width: 700px; color: var(--text-dim);" data-reveal>
+        A multi-disciplinary exploration into the geographic, scientific, and human consequences of tectonic activity.
+    </p>
+    <div class="team-box" data-reveal>
+        Shrijal • Ajitendra • Vaidik • Inisha [cite: 3]
+    </div>
 </header>
 
-<section class="card">
-<h2>Introduction</h2>
-<p>
-Earthquakes are sudden vibrations of the Earth’s crust caused by the
-release of stored energy along tectonic plate boundaries.
-This project studies earthquakes as both <b>natural phenomena</b>
-and <b>human disasters</b>.
-</p>
+<section data-reveal>
+    <div class="content-text">
+        <h2>Week 1: The Human Geography of Risk</h2>
+        <p>Our journey began by comparing major earthquakes in <b>Italy, Nepal, Gujarat, and Turkey</b>. We learned that the "Why" of a disaster is often linked to human factors rather than just the magnitude of the tremor[cite: 7].</p>
+        <ul>
+            <li><b>Vulnerability:</b> Socio-economic status determines survival[cite: 7].</li>
+            <li><b>Preparedness:</b> Strict building codes are the primary defense against ground displacement[cite: 7].</li>
+        </ul>
+    </div>
+    <div class="visual-container">
+        
+        <div class="caption">Figure 1: Building code effectiveness in earthquake zones [cite: 7]</div>
+    </div>
 </section>
 
-<section class="card">
-<h2>Week 1 – Case Studies & Human Geography</h2>
-<p>
-Our analysis of earthquakes in Italy, Nepal, Gujarat, and Turkey showed
-that the same magnitude earthquake can have very different impacts.
-</p>
-<div class="timeline">
-<div class="step">✔ Strong building codes reduce damage</div>
-<div class="step">✔ Emergency response saves lives</div>
-<div class="step">✔ Poverty increases vulnerability</div>
-</div>
+<section data-reveal>
+    <div class="content-text">
+        <h2>Week 2: Tectonic Mechanics</h2>
+        <p>We tracked real-time tremors to understand that seismic activity is a predictable consequence of the movement of the Earth’s lithosphere[cite: 11]. Plates are in constant, slow motion over the asthenosphere, creating immense stress at their boundaries[cite: 11].</p>
+    </div>
+    <div class="visual-container">
+        
+
+[Image of the three types of plate boundaries: Convergent, Divergent, and Transform]
+
+        <div class="caption">Figure 2: The mechanics of tectonic interaction [cite: 9]</div>
+    </div>
 </section>
 
-<section class="card">
-<h2>Week 2 – Plate Tectonics</h2>
-<p>
-The Earth’s lithosphere is divided into tectonic plates that move
-slowly over the asthenosphere. Stress builds up at plate boundaries.
-</p>
-<div class="diagram">
-<b>Plate Boundaries</b><br>
-Convergent • Divergent • Transform
-<center>
-<img src="data:image/png;base64,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">
-</center>
-</div>
+<section data-reveal>
+    <div class="content-text">
+        <h2>Week 3: The Science of Seismology</h2>
+        <p>This phase focused on interpreting the data. We studied how <b>P-waves</b> (Primary) and <b>S-waves</b> (Secondary) travel through the Earth. Locating the <b>epicenter</b> and <b>hypocenter</b> allows scientists to calculate the exact energy release[cite: 15].</p>
+    </div>
+    <div class="visual-container">
+        
+        <div class="caption">Figure 3: Translating ground movement into hazard data </div>
+    </div>
 </section>
 
-<section class="card">
-<h2>Week 3 – Seismology & Measurement</h2>
-<p>
-Seismology uses seismic waves to measure earthquakes.
-P-waves travel fastest, while S-waves are slower but more destructive.
-</p>
-<div class="diagram">
-<center>
-<b>Focus</b> → Origin of earthquake<br>
-<b>Epicenter</b> →<b></b> Point on surface</b></center>
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-csbcURRab6W1WQDOu6CNi6F_oLGX2jQobw&s">
-</div>
+<section data-reveal>
+    <div class="content-text">
+        <h2>Interactive Simulation</h2>
+        <p>Our project model demonstrates how seismic waves impact infrastructure. Use the control below to simulate a seismic event and observe the shaking effect on the buildings above the fault line[cite: 7, 25].</p>
+        <button onclick="triggerQuake()">Simulate Earthquake</button>
+    </div>
+    <div class="visual-container">
+        <div class="quake-stage" id="stage">
+            <div class="buildings">
+                <div class="b tall"></div><div class="b mid"></div><div class="b short"></div>
+                <div class="b tall"></div><div class="b mid"></div>
+            </div>
+            <div class="ground-layer"></div>
+        </div>
+        <div class="caption">Experimental Model: Infrastructure stress test [cite: 7]</div>
+    </div>
 </section>
 
-<section class="card scene" id="scene">
-<h2>Interactive Earthquake Model</h2>
-<p>
-This experimental model visually demonstrates tectonic movement,
-ground shaking, and the location of the focus and epicenter.
-</p>
-
-<div class="ground">
-<div class="city">
-<div class="building tall"></div>
-<div class="building mid"></div>
-<div class="building short"></div>
-<div class="building mid"></div>
-<div class="building tall"></div>
-</div>
-
-<div class="surface"></div>
-<div class="plate left"></div>
-<div class="plate right"></div>
-<div class="focus"></div>
-<div class="epicenter"></div>
-<div class="label" style="bottom:30px">Focus</div>
-<div class="label" style="bottom:150px">Epicenter</div>
-</div>
-
-<div class="controls">
-<button onclick="scene.classList.toggle('quake')">
-Trigger Earthquake
-</button>
-</div>
+<section data-reveal>
+    <div class="content-text">
+        <h2>Week 4: Localized Risk in India</h2>
+        <p>We plotted India's seismic zones (from Zone II to Zone V) on the Richter Scale. We concluded that public awareness and understanding of instrumentation are the most critical steps for national safety[cite: 19].</p>
+    </div>
+    <div class="visual-container">
+        
+        <div class="caption">Figure 4: India’s vulnerability profile by region </div>
+    </div>
 </section>
 
-<section class="card">
-<h2>Week 4 – Earthquake Risk in India</h2>
-<p>
-India is divided into seismic zones ranging from Zone II to Zone V.
-Zone V areas such as the Himalayas are most earthquake-prone.
-</p>
-</section>
-
-<section class="card">
-<h2>Safety & Preparedness</h2>
-<ul>
-<li>Drop, Cover, and Hold On</li>
-<li>Move to open areas if outdoors</li>
-<li>Keep an emergency kit ready</li>
-</ul>
+<section data-reveal style="background: linear-gradient(to bottom right, #1e3a8a, #1e1b4b); grid-template-columns: 1fr;">
+    <div class="content-text" style="text-align: center;">
+        <h2 style="color: #fbbf24;">Essential Safety & Preparedness [cite: 20, 23]</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px;">
+            <div class="visual-container" style="background: rgba(255,255,255,0.05);">
+                <h3>DROP, COVER, HOLD ON</h3>
+                <p>Get low, seek cover under sturdy furniture, and hold firm[cite: 25].</p>
+            </div>
+            <div class="visual-container" style="background: rgba(255,255,255,0.05);">
+                <h3>AVOID HAZARDS</h3>
+                <p>Stay away from glass, windows, and unsecured tall furniture[cite: 26].</p>
+            </div>
+            <div class="visual-container" style="background: rgba(255,255,255,0.05);">
+                <h3>EMERGENCY KIT</h3>
+                <p>Keep a stocked kit with water, food, and first-aid supplies ready[cite: 27].</p>
+            </div>
+        </div>
+    </div>
 </section>
 
 <footer>
-CBSE / ICSE Experimental Learning Project – Geography
+    <p><b>The Global Seismic Venture</b></p>
+    <p style="color: var(--text-dim);">CBSE / ICSE Experimental Learning Project – Geography</p>
 </footer>
+
+<script>
+    // Reveal Observer
+    const observerOptions = { threshold: 0.2 };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+    // Quake Logic
+    function triggerQuake() {
+        const stage = document.getElementById('stage');
+        stage.classList.add('shaking');
+        setTimeout(() => {
+            stage.classList.remove('shaking');
+        }, 2000);
+    }
+</script>
 
 </body>
 </html>
