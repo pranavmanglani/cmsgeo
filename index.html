@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Global Seismic Venture - ELP Master Edition</title>
+    <title>The Global Seismic Venture - Complete ELP Edition</title>
     <style>
         :root {
             --primary: #0f172a;
@@ -14,148 +14,52 @@
             --danger: #ef4444;
         }
 
-        * { box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
+        * { box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { margin: 0; background: var(--primary); color: var(--text-main); line-height: 1.8; }
 
-        body {
-            margin: 0;
-            background-color: var(--primary);
-            background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #0f172a 100%);
-            color: var(--text-main);
-            line-height: 1.7;
-        }
-
-        header {
-            padding: 100px 20px;
-            text-align: center;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            margin: 0;
-            background: linear-gradient(to right, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: 800;
-        }
-
-        .team-badge {
-            margin-top: 15px;
-            padding: 8px 25px;
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 50px;
-            color: #60a5fa;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .content-container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-
-        section {
-            margin: 60px 0;
-            padding: 40px;
-            background: var(--glass);
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.05);
-            backdrop-filter: blur(10px);
-        }
-
-        h2 { color: #60a5fa; border-left: 4px solid #3b82f6; padding-left: 15px; margin-bottom: 25px; }
-
-        /* ================= FIXED INTERACTIVE SIMULATOR ================= */
-        .sim-frame {
-            background: #020617;
-            height: 500px;
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid #1e293b;
-            margin-bottom: 20px;
-        }
-
-        .sky-view {
-            height: 300px;
-            position: relative;
-            border-bottom: 8px solid #22c55e;
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            padding: 0 50px;
-            z-index: 5;
-        }
-
-        .building {
-            width: 60px;
-            background: #334155;
-            position: relative;
-            transition: all 1.5s cubic-bezier(0.22, 1, 0.36, 1);
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        /* Windows */
-        .building::before {
-            content: "";
-            position: absolute;
-            width: 100%; height: 100%;
-            background-image: radial-gradient(rgba(255,255,255,0.1) 20%, transparent 20%);
-            background-size: 12px 18px;
-        }
-
-        .b-tall { height: 220px; }
-        .b-mid { height: 130px; }
-        .b-short { height: 70px; width: 45px; }
-
-        /* Seismic Markers */
-        .marker { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; z-index: 10; }
-        .epicenter { bottom: -12px; width: 28px; height: 28px; background: var(--danger); box-shadow: 0 0 25px var(--danger); }
-        .focus { top: 70px; width: 18px; height: 18px; background: #f59e0b; box-shadow: 0 0 35px #f59e0b; }
-
-        .label-tag {
-            position: absolute; background: rgba(0,0,0,0.85);
-            padding: 4px 12px; border-radius: 6px; font-size: 11px;
-            font-weight: bold; color: white; border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        /* Earthquake Animation */
-        .shaking .sky-view { animation: quakeJitter 0.1s infinite; }
+        /* Layout */
+        header { padding: 120px 20px; text-align: center; background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%); }
+        h1 { font-size: 3.5rem; margin: 0; background: linear-gradient(to right, #60a5fa, #f472b6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .team-badge { margin-top: 15px; display: inline-block; padding: 10px 30px; background: var(--glass); border: 1px solid rgba(255,255,255,0.1); border-radius: 50px; color: #60a5fa; font-weight: bold; }
         
-        /* THE CRUMBLE & SINK EFFECT */
-        .shaking .fail {
-            transform: rotate(25deg) translateY(70px); /* Sinks deep into the ground layer */
-            filter: brightness(0.3) grayscale(1);
-            opacity: 0.8;
-        }
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+        section { margin: 80px 0; padding: 50px; background: var(--glass); border-radius: 40px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(15px); }
+        h2 { color: #60a5fa; font-size: 2.2rem; border-left: 5px solid #3b82f6; padding-left: 20px; margin-bottom: 30px; }
 
-        @keyframes quakeJitter {
-            0% { transform: translate(2px, 1px); }
-            50% { transform: translate(-2px, -1px); }
-            100% { transform: translate(1px, -2px); }
-        }
+        /* --- FIXED INTERACTIVE MODEL --- */
+        .sim-container { background: #020617; height: 500px; border-radius: 24px; position: relative; overflow: hidden; border: 2px solid #1e293b; margin: 30px 0; }
+        .sky { height: 300px; position: relative; border-bottom: 10px solid #22c55e; display: flex; align-items: flex-end; justify-content: space-around; padding: 0 50px; z-index: 5; }
+        
+        .building { width: 65px; background: #334155; position: relative; transition: all 1.5s cubic-bezier(0.25, 1, 0.5, 1); border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 -5px 15px rgba(0,0,0,0.3); }
+        .building::after { content: ""; position: absolute; width: 100%; height: 100%; background-image: radial-gradient(rgba(255,255,255,0.1) 20%, transparent 20%); background-size: 12px 18px; }
+        
+        .b-tall { height: 230px; }
+        .b-mid { height: 140px; }
+        .b-short { height: 80px; width: 50px; }
 
-        /* ================= CONTENT STYLES ================= */
-        .map-box { text-align: center; margin: 30px 0; }
-        .map-box img { 
-            max-width: 100%; border-radius: 20px; 
-            border: 4px solid #1e293b; transition: 0.3s;
-        }
+        /* Earthquake Effects */
+        .quake-active .sky { animation: shake 0.1s infinite; }
+        .quake-active .building.crumble { transform: rotate(25deg) translateY(80px); filter: brightness(0.3) grayscale(1); opacity: 0.8; }
+        @keyframes shake { 0% { transform: translate(2px, 2px); } 50% { transform: translate(-2px, -1px); } 100% { transform: translate(1px, -2px); } }
 
-        .quiz-option {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.08);
-            padding: 18px; margin: 12px 0;
-            border-radius: 12px; cursor: pointer; transition: 0.3s;
-        }
-        .quiz-option:hover { background: rgba(59, 130, 246, 0.1); border-color: #3b82f6; }
+        /* Markers */
+        .marker { position: absolute; left: 50%; transform: translateX(-50%); border-radius: 50%; z-index: 10; }
+        .epicenter { bottom: -15px; width: 30px; height: 30px; background: var(--danger); box-shadow: 0 0 30px var(--danger); }
+        .focus { top: 70px; width: 20px; height: 20px; background: #f59e0b; box-shadow: 0 0 40px #f59e0b; }
+        .label { position: absolute; background: rgba(0,0,0,0.8); padding: 5px 12px; border-radius: 8px; font-size: 11px; font-weight: bold; color: white; white-space: nowrap; }
+
+        /* --- CONTENT IMAGES --- */
+        .img-card { text-align: center; margin: 40px 0; }
+        .img-card img { max-width: 100%; border-radius: 20px; border: 3px solid #334155; }
+        .img-caption { color: var(--text-dim); font-size: 0.9rem; margin-top: 10px; }
+
+        /* --- QUIZ --- */
+        .quiz-opt { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.1); padding: 20px; margin: 12px 0; border-radius: 15px; cursor: pointer; transition: 0.3s; }
+        .quiz-opt:hover { background: rgba(59, 130, 246, 0.1); border-color: #3b82f6; }
         .hidden { display: none; }
+        .btn { background: var(--accent); color: white; border: none; padding: 18px 50px; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
 
-        .btn {
-            background: var(--accent); color: white; border: none;
-            padding: 16px 45px; border-radius: 12px; font-weight: bold;
-            cursor: pointer; transition: 0.3s; font-size: 1rem;
-        }
-
-        footer { text-align: center; padding: 60px; color: var(--text-dim); }
+        footer { text-align: center; padding: 80px; color: var(--text-dim); border-top: 1px solid rgba(255,255,255,0.05); }
     </style>
 </head>
 <body>
@@ -165,109 +69,109 @@
     <div class="team-badge">SHRIJAL • AJITENDRA • VAIDIK • INISHA</div>
 </header>
 
-<div class="content-container">
+<div class="container">
 
     <section>
-        <h2>Week 1: Socio-Economic Impact</h2>
-        <p>Our project began by analyzing major earthquakes in <b>Italy, Nepal, Gujarat, and Turkey</b>. We discovered that the severity of an earthquake's impact is not just geological, but <b>socio-economic</b>.</p>
-        <p>Developing nations often face higher casualty rates due to a lack of enforced building codes and limited emergency resources. This realization shifted our focus toward the <i>human geography of risk.</i></p>
+        <h2>Week 1: Socio-Economic Insights</h2>
+        <p><b>Shrijal's Reflection:</b> Our analysis of Italy, Nepal, Gujarat, and Turkey revealed that vulnerability is not just geological, but socio-economic. The same magnitude quake results in vastly different human impacts based on building codes, preparedness, and economic resources. This set our focus on the human geography of risk.</p>
+        <div class="img-card">
+             
+            <div class="img-caption">Figure 1.1: Relationship between the Focus and the Epicenter</div>
+        </div>
     </section>
 
     <section>
         <h2>Interactive Seismic Anatomy</h2>
-        <p>Observe the relationship between the <b>Focus</b> (underground rupture) and the <b>Epicenter</b> (surface point). Trigger the quake to see how energy waves cause structural failure in unreinforced buildings.</p>
+        <p>Observe how energy travels from the <b>Focus</b> (deep underground) to the <b>Epicenter</b>. Notice how "engineered" buildings stay upright while others tilt and sink into the softened ground layer.</p>
         
-        <div class="sim-frame" id="simZone">
-            <div class="sky-view">
+        <div class="sim-container" id="quakeFrame">
+            <div class="sky">
                 <div class="building b-tall"></div>
-                <div class="building b-mid fail"></div> <div class="building b-short"></div>
-                <div class="building b-tall fail"></div> <div class="building b-mid"></div>
+                <div class="building b-mid crumble"></div> <div class="building b-short"></div>
+                <div class="building b-tall crumble"></div> <div class="building b-mid"></div>
 
                 <div class="marker epicenter"></div>
-                <div class="label-tag" style="bottom: 25px; left: 53%;">EPICENTER</div>
+                <div class="label" style="bottom: 30px; left: 53%;">EPICENTER (Surface Impact)</div>
             </div>
-            <div class="ground-layer" style="height:200px; background: linear-gradient(#3e2723, #1a0a02); position:relative;">
+            <div class="ground" style="height: 200px; background: linear-gradient(#3e2723, #1a0a02); position: relative;">
                 <div class="marker focus"></div>
-                <div class="label-tag" style="top: 85px; left: 53%;">FOCUS (Hypocenter)</div>
+                <div class="label" style="top: 90px; left: 53%;">FOCUS (Hypocenter - Rupture Point)</div>
             </div>
         </div>
-        <center><button class="btn" onclick="startQuake()">Trigger Earthquake</button></center>
+        <center><button class="btn" onclick="triggerQuake()">Trigger Earthquake</button></center>
     </section>
-
-    
 
     <section>
         <h2>Week 2 & 3: Tectonic Understanding</h2>
-        <p>Earthquakes are predictable consequences of plate movements—specifically at <b>convergent, divergent, and transform boundaries</b>. Using seismographs, we can measure the waves produced:</p>
-        <ul>
-            <li><b>P-Waves:</b> Primary waves that travel fastest and arrive first.</li>
-            <li><b>S-Waves:</b> Secondary waves that move slower and cause significant ground shaking.</li>
-        </ul>
+        <p><b>Ajitendra's Research:</b> Seismic activity is a predictable consequence of plate movements: Convergent, Divergent, and Transform boundaries. We measure this energy using P-Waves (fastest) and S-Waves (most destructive).</p>
+        <div class="img-card">
+            
+            <div class="img-caption">Figure 2.1: Particle motion of Seismic Primary and Secondary Waves</div>
+        </div>
+        <p><b>Vaidik's Data:</b> Using instrumentation like the Seismograph, we calculate the magnitude on the Richter Scale, allowing us to quantify the disaster's scale objectively.</p>
     </section>
-
-    
 
     <section>
         <h2>Week 4: India's Seismic Zonation</h2>
-        <p>India is highly vulnerable, with over 60% of its land area prone to shaking. We categorized these into zones (II to V) based on the Bureau of Indian Standards.</p>
-        <div class="map-box">
+        <p><b>Inisha's Analysis:</b> Over 60% of India is prone to moderate to severe shaking. We focused on localized risk, noting that Zone V (Himalayas, Kutch) represents the highest threat level.</p>
+        <div class="img-card">
+            
             <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/India_seismic_zone_map.svg/800px-India_seismic_zone_map.svg.png" 
-                 alt="India Seismic Zones"
+                 alt="India Seismic Map" 
                  onerror="this.src='https://www.researchgate.net/profile/S-K-Nath/publication/225154388/figure/fig1/AS:302251703685121@1449073673752/Seismic-zonation-map-of-India-BIS-1893-Part-I-2002.png'">
-        </div>
-        <p style="color: var(--text-dim); text-align: center;">Zone V (Red) includes the Himalayas and Rann of Kutch—areas of highest damage risk.</p>
-    </section>
-
-    <section>
-        <h2>Safety & Preparedness</h2>
-        <p>Preparedness is the key to survival. Inisha’s research highlights these critical actions:</p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-            <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px;">
-                <h3>1. Drop, Cover, Hold On</h3>
-                <p>The standard protocol for indoor shaking. Protect your head and neck.</p>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px;">
-                <h3>2. Evacuate Safely</h3>
-                <p>Avoid elevators. Move to open spaces away from buildings and power lines.</p>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); padding: 20px; border-radius: 15px;">
-                <h3>3. Emergency Kit</h3>
-                <p>Always keep a supply of water, non-perishable food, and first-aid ready.</p>
-            </div>
+            <div class="img-caption">Figure 4.1: Official Seismic Zonation Map of India (BIS)</div>
         </div>
     </section>
 
     <section>
-        <h2>Seismic Knowledge Quiz</h2>
+        <h2>Essential Safety Precautions</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+            <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+                <h3 style="color: #60a5fa;">1. DROP, COVER, HOLD ON</h3>
+                <p>The primary indoor safety protocol. Protect your head and neck under sturdy furniture.</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+                <h3 style="color: #60a5fa;">2. AVOID HAZARDS</h3>
+                <p>Stay away from windows, glass, and tall furniture. Use stairs, never elevators.</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
+                <h3 style="color: #60a5fa;">3. EMERGENCY KIT</h3>
+                <p>Maintain 72 hours of water, food, and first-aid in an easy-to-grab bag.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Seismic Mastery Quiz</h2>
         <div id="quiz">
             <div id="q1" class="quiz-step">
-                <p><b>1. What is the subterranean point where the earthquake rupture begins?</b></p>
-                <div class="quiz-option" onclick="handleQuiz(1, true)">Focus (Hypocenter)</div>
-                <div class="quiz-option" onclick="handleQuiz(1, false)">Epicenter</div>
+                <p><b>1. What is the underground point where a tectonic rupture begins?</b></p>
+                <div class="quiz-opt" onclick="ans(1, true)">Focus (Hypocenter)</div>
+                <div class="quiz-opt" onclick="ans(1, false)">Epicenter</div>
             </div>
             <div id="q2" class="quiz-step hidden">
-                <p><b>2. Which waves are longitudinal and arrive first at a seismograph?</b></p>
-                <div class="quiz-option" onclick="handleQuiz(2, true)">P-Waves</div>
-                <div class="quiz-option" onclick="handleQuiz(2, false)">S-Waves</div>
+                <p><b>2. Which seismic waves arrive first at a recording station?</b></p>
+                <div class="quiz-opt" onclick="ans(2, true)">P-Waves</div>
+                <div class="quiz-opt" onclick="ans(2, false)">S-Waves</div>
             </div>
             <div id="q3" class="quiz-step hidden">
-                <p><b>3. Which Indian zone represents the highest damage risk?</b></p>
-                <div class="quiz-option" onclick="handleQuiz(3, false)">Zone II</div>
-                <div class="quiz-option" onclick="handleQuiz(3, true)">Zone V</div>
+                <p><b>3. Which Indian zone is considered the "High Intensity Zone"?</b></p>
+                <div class="quiz-opt" onclick="ans(3, false)">Zone II</div>
+                <div class="quiz-opt" onclick="ans(3, true)">Zone V</div>
             </div>
             <div id="q4" class="quiz-step hidden">
-                <p><b>4. What should you avoid using during an earthquake evacuation?</b></p>
-                <div class="quiz-option" onclick="handleQuiz(4, true)">Elevators</div>
-                <div class="quiz-option" onclick="handleQuiz(4, false)">Stairs</div>
+                <p><b>4. What should you do if you are indoors during an earthquake?</b></p>
+                <div class="quiz-opt" onclick="ans(4, true)">Drop, Cover, and Hold On</div>
+                <div class="quiz-opt" onclick="ans(4, false)">Run for the elevator</div>
             </div>
             <div id="q5" class="quiz-step hidden">
-                <p><b>5. Which boundary is formed when two plates slide past each other?</b></p>
-                <div class="quiz-option" onclick="handleQuiz(5, false)">Convergent</div>
-                <div class="quiz-option" onclick="handleQuiz(5, true)">Transform</div>
+                <p><b>5. Which plates slide past each other at a Transform Boundary?</b></p>
+                <div class="quiz-opt" onclick="ans(5, true)">San Andreas Fault type</div>
+                <div class="quiz-opt" onclick="ans(5, false)">Himalayan type</div>
             </div>
-            <div id="results" class="hidden" style="text-align: center;">
-                <h3 id="score-text"></h3>
-                <button class="btn" onclick="location.reload()">Retry Quiz</button>
+            <div id="res" class="hidden" style="text-align: center;">
+                <h3 id="scoreText"></h3>
+                <button class="btn" onclick="location.reload()">Restart Project</button>
             </div>
         </div>
     </section>
@@ -275,25 +179,25 @@
 </div>
 
 <footer>
-    Project by Shrijal, Ajitendra, Vaidik, and Inisha • ELP 2025
+    Project by Shrijal, Ajitendra, Vaidik, and Inisha | ELP 2025
 </footer>
 
 <script>
-    function startQuake() {
-        const frame = document.getElementById('simZone');
-        frame.classList.add('shaking');
-        setTimeout(() => { frame.classList.remove('shaking'); }, 3000);
+    function triggerQuake() {
+        const frame = document.getElementById('quakeFrame');
+        frame.classList.add('quake-active');
+        setTimeout(() => { frame.classList.remove('quake-active'); }, 3000);
     }
 
     let score = 0;
-    function handleQuiz(num, correct) {
+    function ans(q, correct) {
         if(correct) score++;
-        document.getElementById('q' + num).classList.add('hidden');
-        if(num < 5) {
-            document.getElementById('q' + (num + 1)).classList.remove('hidden');
+        document.getElementById('q' + q).classList.add('hidden');
+        if(q < 5) {
+            document.getElementById('q' + (q + 1)).classList.remove('hidden');
         } else {
-            document.getElementById('results').classList.remove('hidden');
-            document.getElementById('score-text').innerText = `You scored ${score} out of 5!`;
+            document.getElementById('res').classList.remove('hidden');
+            document.getElementById('scoreText').innerText = `You scored ${score} out of 5!`;
         }
     }
 </script>
